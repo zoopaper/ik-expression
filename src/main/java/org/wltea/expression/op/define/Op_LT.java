@@ -52,8 +52,7 @@ public class Op_LT implements IOperatorExecution {
             second = secondRef.execute();
         }
 
-        if (BaseDataMeta.DataType.DATATYPE_DATE == first.getDataType()
-                && BaseDataMeta.DataType.DATATYPE_DATE == second.getDataType()) {
+        if (BaseDataMeta.DataType.DATATYPE_DATE == first.getDataType() && BaseDataMeta.DataType.DATATYPE_DATE == second.getDataType()) {
             //日期类型比较
             int result = first.getDateValue().compareTo(second.getDateValue());
             if (result < 0) {
@@ -62,8 +61,7 @@ public class Op_LT implements IOperatorExecution {
                 return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.FALSE);
             }
 
-        } else if (BaseDataMeta.DataType.DATATYPE_STRING == first.getDataType()
-                && BaseDataMeta.DataType.DATATYPE_STRING == second.getDataType()) {
+        } else if (BaseDataMeta.DataType.DATATYPE_STRING == first.getDataType() && BaseDataMeta.DataType.DATATYPE_STRING == second.getDataType()) {
             //字窜类型比较
             int result = first.getStringValue().compareTo(second.getStringValue());
             if (result < 0) {

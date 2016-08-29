@@ -18,22 +18,29 @@ import java.nio.CharBuffer;
  *          Sep 21, 2008
  */
 public class ExpressionReader extends StringReader {
-
-    private static final String IGNORE_CHAR = " \r\n\t";//词元间的忽略字符
-
-    private int currentIndex = 0;//当前索引
-
-    private int markIndex = 0;//被标记后索引
-
-    private boolean prefixBlank = false;//与上一个读到的ElementToken之间是否有空格
+    /**
+     * 词元间的忽略字符
+     */
+    private static final String IGNORE_CHAR = " \r\n\t";
+    /**
+     * 当前索引
+     */
+    private int currentIndex = 0;
+    /**
+     * 被标记后索引
+     */
+    private int markIndex = 0;
+    /**
+     * 与上一个读到的ElementToken之间是否有空格
+     */
+    private boolean prefixBlank = false;
 
     public ExpressionReader(String s) {
         super(s);
     }
 
     public static void main(String[] a) {
-        ExpressionReader eReader = new ExpressionReader(" aa+\"A\n" +
-                "B\\\\CD\"!=null&&[2008-1-1 12:9]-$max(aa,bb,\"cc\")>2l3f4d1");
+        ExpressionReader eReader = new ExpressionReader(" aa+\"A\n" + "B\\\\CD\"!=null&&[2008-1-1 12:9]-$max(aa,bb,\"cc\")>2l3f4d1");
 
         Element ele = null;
         try {
@@ -52,7 +59,7 @@ public class ExpressionReader extends StringReader {
      *
      * @return
      */
-    public int getCruuentIndex() {
+    public int getCurrentIndex() {
         return currentIndex;
     }
 
@@ -124,10 +131,9 @@ public class ExpressionReader extends StringReader {
     /**
      * 以流形式读取ExpressionToken
      *
-     * @return ExpressionToken
+     * @return Element
      * @throws IOException
      * @throws FormatException
-     * @throws AntipathicException
      */
     public Element readToken() throws IOException, FormatException {
         prefixBlank = false;
@@ -139,7 +145,8 @@ public class ExpressionReader extends StringReader {
                 return null;
             }
             char c = (char) b;
-            if (IGNORE_CHAR.indexOf(c) >= 0) {//去除开始的空格
+            //去除开始的空格
+            if (IGNORE_CHAR.indexOf(c) >= 0) {
                 prefixBlank = true;
                 continue;
             }

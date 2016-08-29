@@ -30,7 +30,7 @@ public class FunctionTypeReader implements ElementReader {
      * @throws IOException
      */
     public Element read(ExpressionReader sr) throws FormatException, IOException {
-        int index = sr.getCruuentIndex();
+        int index = sr.getCurrentIndex();
         StringBuffer sb = new StringBuffer();
         int b = sr.read();
         if (b == -1 || b != FunctionTypeReader.START_MARK) {

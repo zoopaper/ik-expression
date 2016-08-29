@@ -111,7 +111,7 @@ public class ExpressionParser {
      * 如果是括号，则记录下来，最后进行最后进行匹配
      *
      * @param ele
-     * @throws AntipathicException
+     * @throws FormatException
      */
     public void pushParenthesis(Element ele) throws FormatException {
         if (ElementType.SPLITOR == ele.getType()) {

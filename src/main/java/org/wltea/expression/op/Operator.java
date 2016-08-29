@@ -83,7 +83,6 @@ public enum Operator {
     private static final HashMap<Operator, IOperatorExecution> OP_EXEC_MAP = new HashMap<Operator, IOperatorExecution>();
 
     static {
-
         OP_RESERVE_WORD.add(NOT.getToken());
         OP_RESERVE_WORD.add(NG.getToken());
 
@@ -115,7 +114,6 @@ public enum Operator {
     }
 
     static {
-
         OP_EXEC_MAP.put(NOT, new Op_NOT());
         OP_EXEC_MAP.put(NG, new Op_NG());
 
@@ -135,7 +133,6 @@ public enum Operator {
         OP_EXEC_MAP.put(NEQ, new Op_NEQ());
 
         OP_EXEC_MAP.put(AND, new Op_AND());
-
         OP_EXEC_MAP.put(OR, new Op_OR());
 
         OP_EXEC_MAP.put(APPEND, new Op_APPEND());
@@ -143,7 +140,6 @@ public enum Operator {
         OP_EXEC_MAP.put(SELECT, new Op_SELECT());
         OP_EXEC_MAP.put(QUES, new Op_QUES());
         OP_EXEC_MAP.put(COLON, new Op_COLON());
-
     }
 
     private String token;
@@ -216,17 +212,17 @@ public enum Operator {
      * 如果合法，则返回含有执行结果类型的Token
      * 如果不合法，则返回null
      *
-     * @param opPositin 操作符位置
-     * @param args      注意args中的参数由于是从栈中按LIFO顺序弹出的，所以必须从尾部倒着取数
+     * @param opPosition 操作符位置
+     * @param baseDataMeta      注意args中的参数由于是从栈中按LIFO顺序弹出的，所以必须从尾部倒着取数
      * @return Constant 常量型的执行结果
      */
-    public Constant verify(int opPositin, BaseDataMeta[] args) throws IllegalExpressionException {
+    public Constant verify(int opPosition, BaseDataMeta[] baseDataMeta) throws IllegalExpressionException {
 
         IOperatorExecution opExec = OP_EXEC_MAP.get(this);
         if (opExec == null) {
             throw new IllegalStateException("系统内部错误：找不到操作符对应的执行定义");
         }
-        return opExec.verify(opPositin, args);
+        return opExec.verify(opPosition, baseDataMeta);
     }
 
 }

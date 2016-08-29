@@ -30,7 +30,7 @@ public class SplitorTypeReader implements ElementReader {
      * @throws IOException
      */
     public Element read(ExpressionReader sr) throws FormatException, IOException {
-        int index = sr.getCruuentIndex();
+        int index = sr.getCurrentIndex();
         int b = sr.read();
         char c = (char) b;
         if (b == -1 || SPLITOR_CHAR.indexOf(c) == -1) {

@@ -15,6 +15,7 @@ public class Element {
     private String text;
     private ElementType type;//类型
     private int index;//元素在表达式中的起始索引号，从0算起
+
     /**
      * 构造
      *
@@ -55,7 +56,7 @@ public class Element {
     public enum ElementType {
         //NULL类型
         NULL,
-        //字符窜
+        //字符串
         STRING,
         //布尔类
         BOOLEAN,

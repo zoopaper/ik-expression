@@ -54,7 +54,7 @@ public class VariableTypeReader implements ElementReader {
     }
 
     public Element read(ExpressionReader sr) throws FormatException, IOException {
-        int index = sr.getCruuentIndex();
+        int index = sr.getCurrentIndex();
         String word = readWord(sr);
 
         if (TRUE_WORD.equals(word) || FALSE_WORD.equals(word)) {

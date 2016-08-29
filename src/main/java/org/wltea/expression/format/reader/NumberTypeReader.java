@@ -43,7 +43,7 @@ public class NumberTypeReader implements ElementReader {
      * @throws FormatException 不是合法的数字类型时抛出
      */
     public Element read(ExpressionReader sr) throws FormatException, IOException {
-        int index = sr.getCruuentIndex();
+        int index = sr.getCurrentIndex();
         StringBuffer sb = new StringBuffer();
         int b = -1;
         while ((b = sr.read()) != -1) {

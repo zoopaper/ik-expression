@@ -12,9 +12,6 @@ package org.wltea.expression.format;
  */
 public class FormatException extends Exception {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 2156367068320450613L;
 
     public FormatException() {
