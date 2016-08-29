@@ -99,8 +99,7 @@ public class Variable extends BaseDataMeta {
         if (o == this) {
             return true;
 
-        } else if (o instanceof Variable
-                && super.equals(o)) {
+        } else if (o instanceof Variable && super.equals(o)) {
 
             Variable var = (Variable) o;
             if (variableName != null

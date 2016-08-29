@@ -31,12 +31,9 @@ public class ExpressionToken {
     private String tokenText;
     //词元在表达式中的起始位置
     private int startPosition = -1;
+
     /**
      * 私有构造函数
-     *
-     * @param tokenText
-     * @param tokenType
-     * @param dataType
      */
     private ExpressionToken() {
     }

@@ -29,7 +29,6 @@ public class Constant extends BaseDataMeta {
 
     }
 
-
     public Constant(Reference ref) {
         super(null, ref);
         this.setReference(true);

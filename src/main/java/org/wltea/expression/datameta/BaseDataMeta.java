@@ -23,6 +23,7 @@ public abstract class BaseDataMeta {
     Object dataValue;
     //引用类型标识
     private boolean isReference;
+
     public BaseDataMeta(DataType dataType, Object dataValue) {
         this.dataType = dataType;
         this.dataValue = dataValue;
@@ -43,9 +44,7 @@ public abstract class BaseDataMeta {
         return dataValue;
     }
 
-    /**
-     *
-     */
+
     @SuppressWarnings("unchecked")
     public String getDataValueText() {
         if (dataValue == null) {
@@ -117,9 +116,7 @@ public abstract class BaseDataMeta {
      * @return
      */
     public Long getLongValue() {
-
-        if (DataType.DATATYPE_INT != this.dataType
-                && DataType.DATATYPE_LONG != this.dataType) {
+        if (DataType.DATATYPE_INT != this.dataType && DataType.DATATYPE_LONG != this.dataType) {
             throw new UnsupportedOperationException("当前常量类型不支持此操作");
         }
         if (dataValue == null) {
@@ -134,10 +131,7 @@ public abstract class BaseDataMeta {
      * @return
      */
     public Float getFloatValue() {
-
-        if (DataType.DATATYPE_INT != this.dataType
-                && DataType.DATATYPE_FLOAT != this.dataType
-                && DataType.DATATYPE_LONG != this.dataType) {
+        if (DataType.DATATYPE_INT != this.dataType && DataType.DATATYPE_FLOAT != this.dataType && DataType.DATATYPE_LONG != this.dataType) {
             throw new UnsupportedOperationException("当前常量类型不支持此操作");
         }
         if (dataValue == null) {
