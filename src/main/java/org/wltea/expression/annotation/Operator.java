@@ -7,12 +7,11 @@ import java.lang.annotation.Target;
 
 /**
  * 运算符重载注解， 支持在Java对象的运算符重载。
- * 
- * @author deonwu
  *
+ * @author deonwu
  */
 @Target(ElementType.METHOD)
-@Retention(RetentionPolicy.RUNTIME)	
+@Retention(RetentionPolicy.RUNTIME)
 public @interface Operator {
-	public String sign() default "+";
+    public String sign() default "+";
 }

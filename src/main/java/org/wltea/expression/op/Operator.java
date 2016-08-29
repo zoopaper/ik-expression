@@ -80,6 +80,7 @@ public enum Operator {
     SELECT("?:", 0, 3);
 
     private static final Set<String> OP_RESERVE_WORD = new HashSet<String>();
+    private static final HashMap<Operator, IOperatorExecution> OP_EXEC_MAP = new HashMap<Operator, IOperatorExecution>();
 
     static {
 
@@ -113,8 +114,6 @@ public enum Operator {
         OP_RESERVE_WORD.add(COLON.getToken());
     }
 
-    private static final HashMap<Operator, IOperatorExecution> OP_EXEC_MAP = new HashMap<Operator, IOperatorExecution>();
-
     static {
 
         OP_EXEC_MAP.put(NOT, new Op_NOT());
@@ -147,6 +146,15 @@ public enum Operator {
 
     }
 
+    private String token;
+    private int priority;
+    private int opType;
+
+    Operator(String token, int priority, int opType) {
+        this.token = token;
+        this.priority = priority;
+        this.opType = opType;
+    }
 
     /**
      * 判断字符串是否是合法的操作符
@@ -156,18 +164,6 @@ public enum Operator {
      */
     public static boolean isLegalOperatorToken(String tokenText) {
         return OP_RESERVE_WORD.contains(tokenText);
-    }
-
-    private String token;
-
-    private int priority;
-
-    private int opType;
-
-    Operator(String token, int priority, int opType) {
-        this.token = token;
-        this.priority = priority;
-        this.opType = opType;
     }
 
     /**
