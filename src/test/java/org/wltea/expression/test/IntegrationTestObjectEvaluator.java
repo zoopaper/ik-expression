@@ -35,10 +35,10 @@ public class IntegrationTestObjectEvaluator extends TestCase {
 		Evaluator<Object> eval = new Evaluator<Object>(){
 
 			@Override
-			public Object evalutor(Operator op, Object first, Object second)
+			public Object evaluator(Operator op, Object first, Object second)
 					throws IllegalExpressionException {
 				
-				System.out.println("evalutor op:" + op.getToken() + ", first:" + first + ", sec:" + second);
+				System.out.println("evaluator op:" + op.getToken() + ", first:" + first + ", sec:" + second);
 				return "**";
 			}
 
@@ -54,7 +54,7 @@ public class IntegrationTestObjectEvaluator extends TestCase {
 		
 		ExpressionContext ctx = new ExpressionContext(){
 			public Object bindObject(String name){
-				System.out.println("evalutor name:" + name);
+				System.out.println("evaluator name:" + name);
 				return new Tx(name); //"**";
 			}
 		};

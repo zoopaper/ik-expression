@@ -174,9 +174,9 @@ public class ExpressionEvaluator {
 
     /**
      * 根据流程上下文，执行公式语言
-     *
      * @param expression
      * @param ctx
+     * @param evaluator
      * @return
      */
     public static Object evaluate(String expression, ExpressionContext ctx, Evaluator evaluator) {
@@ -186,19 +186,18 @@ public class ExpressionEvaluator {
         if (ctx == null) {
             ctx = new ExpressionContext();
         }
-
         if (evaluator != null) {
             ctx.setEvaluator(evaluator);
         }
 
-        ExpressionExecutor ee = new ExpressionExecutor(ctx);
+        ExpressionExecutor expressionExecutor = new ExpressionExecutor(ctx);
         try {
             //解析表达式词元
-            List<ExpressionToken> expTokens = ee.analyze(expression);
+            List<ExpressionToken> expTokens = expressionExecutor.analyze(expression);
             //转化RPN，并验证
-            expTokens = ee.compile(expTokens);
+            expTokens = expressionExecutor.compile(expTokens);
             //执行RPN
-            Constant constant = ee.execute(expTokens);
+            Constant constant = expressionExecutor.execute(expTokens);
             return constant.toJavaObject();
 
         } catch (IllegalExpressionException e) {

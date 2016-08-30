@@ -96,7 +96,7 @@ public class Reference {
             }
 
             if (evaluator != null && evaluator.canOperator(op, first, second)) {
-                return evaluator.evalutor(op, first, second);
+                return evaluator.evaluator(op, first, second);
             } else {
                 return op.execute(arguments);
             }

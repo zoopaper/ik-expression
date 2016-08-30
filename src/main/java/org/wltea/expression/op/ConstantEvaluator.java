@@ -23,7 +23,7 @@ public class ConstantEvaluator implements Evaluator<Constant> {
 
     @SuppressWarnings("unchecked")
     @Override
-    public Constant evalutor(Operator op, Constant first, Constant second) throws IllegalExpressionException {
+    public Constant evaluator(Operator op, Constant first, Constant second) throws IllegalExpressionException {
 
         Object firstObj = null;
         Object secondObj = null;
@@ -46,7 +46,7 @@ public class ConstantEvaluator implements Evaluator<Constant> {
 
         Object obj = null;
         if (evaluator != null && evaluator.canOperator(op, firstObj, secondObj)) {
-            obj = evaluator.evalutor(op, firstObj, secondObj);
+            obj = evaluator.evaluator(op, firstObj, secondObj);
         } else if (firstObj instanceof Evaluable) {
             Evaluable o = (Evaluable) firstObj;
             if (op.equals(Operator.AND)) {

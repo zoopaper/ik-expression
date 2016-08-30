@@ -82,13 +82,19 @@ public class ExpressionParser {
         return operators.get(name);
     }
 
+    /**
+     * @param expression
+     * @return
+     * @throws FormatException
+     */
     public List<ExpressionToken> getExpressionTokens(String expression) throws FormatException {
-        ExpressionReader eReader = new ExpressionReader(expression);
+        ExpressionReader expressionReader = new ExpressionReader(expression);
         List<ExpressionToken> list = new ArrayList<ExpressionToken>();
-        ExpressionToken expressionToken = null;//上一次读取的ExpressionToken
+        //上一次读取的ExpressionToken
+        ExpressionToken expressionToken = null;
         Element ele = null;
         try {
-            while ((ele = eReader.readToken()) != null) {
+            while ((ele = expressionReader.readToken()) != null) {
                 expressionToken = changeToToken(expressionToken, ele);
                 //如果是括号，则记录下来，最后进行最后进行匹配
                 pushParenthesis(ele);

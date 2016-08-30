@@ -42,18 +42,15 @@ public class ExpressionExecutor {
      * @return
      */
     public List<ExpressionToken> analyze(String expression) throws IllegalExpressionException {
-
         ExpressionParser expParser = new ExpressionParser();
         List<ExpressionToken> list = null;
         try {
             list = expParser.getExpressionTokens(expression);
             return list;
-
         } catch (FormatException e) {
             e.printStackTrace();
             throw new IllegalExpressionException(e.getMessage());
         }
-
     }
 
     /**

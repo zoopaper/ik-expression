@@ -20,22 +20,22 @@ public class VariableTypeReader implements ElementReader {
 
     public static final String TRUE_WORD = "true";
     public static final String FALSE_WORD = "false";
-
     public static final String NULL_WORD = "null";
 
     /**
-     * @param sr
+     * @param reader
      * @return
      * @throws FormatException
      */
-    private String readWord(ExpressionReader sr) throws FormatException, IOException {
+    private String readWord(ExpressionReader reader) throws FormatException, IOException {
         StringBuffer sb = new StringBuffer();
         boolean readStart = true;
         int b = -1;
-        while ((b = sr.read()) != -1) {
+        while ((b = reader.read()) != -1) {
             char c = (char) b;
-            if (STOP_CHAR.indexOf(c) >= 0 && !readStart) {//单词停止符,并且忽略第一个字符
-                sr.reset();
+            //单词停止符,并且忽略第一个字符
+            if (STOP_CHAR.indexOf(c) >= 0 && !readStart) {
+                reader.reset();
                 return sb.toString();
             }
             if (!Character.isJavaIdentifierPart(c)) {
@@ -48,14 +48,14 @@ public class VariableTypeReader implements ElementReader {
                 readStart = false;
             }
             sb.append(c);
-            sr.mark(0);
+            reader.mark(0);
         }
         return sb.toString();
     }
 
-    public Element read(ExpressionReader sr) throws FormatException, IOException {
-        int index = sr.getCurrentIndex();
-        String word = readWord(sr);
+    public Element read(ExpressionReader expressionReader) throws FormatException, IOException {
+        int index = expressionReader.getCurrentIndex();
+        String word = readWord(expressionReader);
 
         if (TRUE_WORD.equals(word) || FALSE_WORD.equals(word)) {
             return new Element(word, index, ElementType.BOOLEAN);

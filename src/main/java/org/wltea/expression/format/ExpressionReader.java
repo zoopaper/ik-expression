@@ -41,7 +41,6 @@ public class ExpressionReader extends StringReader {
 
     public static void main(String[] a) {
         ExpressionReader eReader = new ExpressionReader(" aa+\"A\n" + "B\\\\CD\"!=null&&[2008-1-1 12:9]-$max(aa,bb,\"cc\")>2l3f4d1");
-
         Element ele = null;
         try {
             while ((ele = eReader.readToken()) != null) {

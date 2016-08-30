@@ -17,7 +17,7 @@ public interface Evaluator<T> {
      * @param second -- 参数对象。如果是单目运算符，参数对象为null。
      * @return
      */
-    public T evalutor(Operator op, T first, T second) throws IllegalExpressionException;
+    public T evaluator(Operator op, T first, T second) throws IllegalExpressionException;
 
     /**
      * 检查是否支持运算符。
