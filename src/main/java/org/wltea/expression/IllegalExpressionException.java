@@ -12,9 +12,6 @@ package org.wltea.expression;
  */
 public class IllegalExpressionException extends Exception {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = -382075370364295450L;
 
     /**

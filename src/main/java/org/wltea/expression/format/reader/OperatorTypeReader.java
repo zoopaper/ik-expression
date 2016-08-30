@@ -98,15 +98,15 @@ public class OperatorTypeReader implements ElementReader {
     /**
      * 从流中读取运算符类型的ExpressionToken
      *
-     * @param sr
+     * @param expressionReader
      * @return
      * @throws FormatException 不是合法的运算符类型时抛出
      * @throws IOException
      */
-    public Element read(ExpressionReader sr) throws FormatException, IOException {
-        int index = sr.getCurrentIndex();
+    public Element read(ExpressionReader expressionReader) throws FormatException, IOException {
+        int index = expressionReader.getCurrentIndex();
         StringBuffer sb = new StringBuffer();
-        int b = sr.read();
+        int b = expressionReader.read();
         if (b == -1) {
             throw new FormatException("表达式已结束");
         }
@@ -114,21 +114,21 @@ public class OperatorTypeReader implements ElementReader {
         sb.append(c);
         if (isOperatorWord(sb.toString())) {
             if (sb.length() == 1) {//两个符号的运算符优先，如<=，不应该认为是<运算符
-                sr.mark(0);
-                b = sr.read();
+                expressionReader.mark(0);
+                b = expressionReader.read();
                 if (b != -1) {
                     if (isOperatorWord(sb.toString() + (char) b)) {
                         return new Element(sb.toString() + (char) b, index,
                                 ElementType.OPERATOR);
                     }
                 }
-                sr.reset();
+                expressionReader.reset();
             }
             return new Element(sb.toString(), index,
                     ElementType.OPERATOR);
         }
 
-        while ((b = sr.read()) != -1) {
+        while ((b = expressionReader.read()) != -1) {
             c = (char) b;
             sb.append(c);
             if (isOperatorWord(sb.toString())) {

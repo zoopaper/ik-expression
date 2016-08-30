@@ -38,15 +38,15 @@ public class NumberTypeReader implements ElementReader {
     /**
      * 从流中读取数字类型的ExpressionToken
      *
-     * @param sr
+     * @param expressionReader
      * @return
      * @throws FormatException 不是合法的数字类型时抛出
      */
-    public Element read(ExpressionReader sr) throws FormatException, IOException {
-        int index = sr.getCurrentIndex();
+    public Element read(ExpressionReader expressionReader) throws FormatException, IOException {
+        int index = expressionReader.getCurrentIndex();
         StringBuffer sb = new StringBuffer();
         int b = -1;
-        while ((b = sr.read()) != -1) {
+        while ((b = expressionReader.read()) != -1) {
             char c = (char) b;
             if (NUMBER_CHARS.indexOf(c) == -1) {
                 if (LONG_MARKS.indexOf(c) >= 0) {
@@ -61,7 +61,7 @@ public class NumberTypeReader implements ElementReader {
                     checkDecimal(sb);
                     return new Element(sb.toString(), index, ElementType.DOUBLE);
                 } else {
-                    sr.reset();
+                    expressionReader.reset();
                     if (sb.indexOf(".") >= 0) {//没有结束标志，有小数点，为double
                         checkDecimal(sb);
                         return new Element(sb.toString(), index, ElementType.DOUBLE);
@@ -71,7 +71,7 @@ public class NumberTypeReader implements ElementReader {
                 }
             }
             sb.append(c);
-            sr.mark(0);
+            expressionReader.mark(0);
         }
         //读到结未
         if (sb.indexOf(".") >= 0) {//没有结束标志，有小数点，为double

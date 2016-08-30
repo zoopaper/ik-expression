@@ -172,20 +172,20 @@ public class DateTypeReader implements ElementReader {
     /**
      * 从流中读取时间类型的ExpressionToken
      *
-     * @param sr
+     * @param expressionReader
      * @return
      * @throws FormatException 不是合法的时间类型时抛出
      * @throws IOException
      */
-    public Element read(ExpressionReader sr) throws FormatException, IOException {
-        int index = sr.getCurrentIndex();
+    public Element read(ExpressionReader expressionReader) throws FormatException, IOException {
+        int index = expressionReader.getCurrentIndex();
         StringBuffer sb = new StringBuffer();
-        int b = sr.read();
+        int b = expressionReader.read();
         if (b == -1 || b != START_MARK) {
             throw new FormatException("不是有效的时间开始");
         }
 
-        while ((b = sr.read()) != -1) {
+        while ((b = expressionReader.read()) != -1) {
             char c = (char) b;
             if (c == END_MARK) {
                 return new Element(formatTime(sb.toString()),

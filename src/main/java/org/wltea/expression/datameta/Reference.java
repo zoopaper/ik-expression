@@ -35,10 +35,10 @@ public class Reference {
         this.token = token;
         this.arguments = args;
         //记录Reference实际的数据类型
-        if (ExpressionToken.ETokenType.ETOKEN_TYPE_FUNCTION == token.getTokenType()) {
+        if (ExpressionToken.ETokenType.FUNCTION == token.getTokenType()) {
             Constant result = FunctionExecution.varify(token.getFunctionName(), token.getStartPosition(), args);
             dataType = result.getDataType();
-        } else if (ExpressionToken.ETokenType.ETOKEN_TYPE_OPERATOR == token.getTokenType()) {
+        } else if (ExpressionToken.ETokenType.OPERATOR == token.getTokenType()) {
             if (isStrict) {
                 Operator op = token.getOperator();
                 Constant result = op.verify(token.getStartPosition(), args);
@@ -85,7 +85,7 @@ public class Reference {
      */
     public Constant execute(Evaluator<Constant> evaluator) throws IllegalExpressionException {
 
-        if (ETokenType.ETOKEN_TYPE_OPERATOR == token.getTokenType()) {
+        if (ETokenType.OPERATOR == token.getTokenType()) {
             //执行操作符
             Operator op = token.getOperator();
             Constant first = arguments[0];
@@ -100,7 +100,7 @@ public class Reference {
             } else {
                 return op.execute(arguments);
             }
-        } else if (ETokenType.ETOKEN_TYPE_FUNCTION == token.getTokenType()) {
+        } else if (ETokenType.FUNCTION == token.getTokenType()) {
             //执行函数
             return FunctionExecution.execute(token.getFunctionName(), token.getStartPosition(), arguments);
 

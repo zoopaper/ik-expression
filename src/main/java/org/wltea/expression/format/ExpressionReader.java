@@ -149,8 +149,8 @@ public class ExpressionReader extends StringReader {
                 prefixBlank = true;
                 continue;
             }
-            reset();//重置
-
+            //重置
+            reset();
             //构造一个词元读取器
             ElementReader er = ElementReaderFactory.createElementReader(this);
 

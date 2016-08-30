@@ -24,26 +24,26 @@ public class FunctionTypeReader implements ElementReader {
     /**
      * 从流中读取函数类型的ExpressionToken
      *
-     * @param sr
+     * @param expressionReader
      * @return
      * @throws FormatException
      * @throws IOException
      */
-    public Element read(ExpressionReader sr) throws FormatException, IOException {
-        int index = sr.getCurrentIndex();
+    public Element read(ExpressionReader expressionReader) throws FormatException, IOException {
+        int index = expressionReader.getCurrentIndex();
         StringBuffer sb = new StringBuffer();
-        int b = sr.read();
+        int b = expressionReader.read();
         if (b == -1 || b != FunctionTypeReader.START_MARK) {
             throw new FormatException("不是有效的函数开始");
         }
         boolean readStart = true;
-        while ((b = sr.read()) != -1) {
+        while ((b = expressionReader.read()) != -1) {
             char c = (char) b;
             if (c == FunctionTypeReader.END_MARK) {
                 if (sb.length() == 0) {
                     throw new FormatException("函数名称不能为空");
                 }
-                sr.reset();
+                expressionReader.reset();
                 return new Element(sb.toString(), index, ElementType.FUNCTION);
             }
             if (!Character.isJavaIdentifierPart(c)) {
@@ -56,7 +56,7 @@ public class FunctionTypeReader implements ElementReader {
                 readStart = false;
             }
             sb.append(c);
-            sr.mark(0);
+            expressionReader.mark(0);
         }
         throw new FormatException("不是有效的函数结束");
     }

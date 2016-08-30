@@ -15,5 +15,11 @@ import java.io.IOException;
  *          Oct 9, 2008
  */
 public interface ElementReader {
-    Element read(ExpressionReader sr) throws FormatException, IOException;
+    /**
+     * @param expressionReader
+     * @return
+     * @throws FormatException
+     * @throws IOException
+     */
+    public Element read(ExpressionReader expressionReader) throws FormatException, IOException;
 }

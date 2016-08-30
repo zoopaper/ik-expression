@@ -78,13 +78,13 @@ public class ExpressionExecutor {
 
         for (ExpressionToken expToken : expTokens) {
 
-            if (ExpressionToken.ETokenType.ETOKEN_TYPE_CONSTANT == expToken.getTokenType()) {
+            if (ExpressionToken.ETokenType.CONSTANT == expToken.getTokenType()) {
                 //读入一个常量，压入逆波兰式队列
                 _RPNExpList.add(expToken);
                 //同时压入校验栈
                 verifyStack.push(expToken);
 
-            } else if (ExpressionToken.ETokenType.ETOKEN_TYPE_VARIABLE == expToken.getTokenType()) {
+            } else if (ExpressionToken.ETokenType.VARIABLE == expToken.getTokenType()) {
                 //验证变量声明
                 Variable var = ctx.getVariable(expToken.getVariable().getVariableName());
                 if (var == null) {
@@ -106,7 +106,7 @@ public class ExpressionExecutor {
                 verifyStack.push(expToken);
 
 
-            } else if (ExpressionToken.ETokenType.ETOKEN_TYPE_OPERATOR == expToken.getTokenType()) {
+            } else if (ExpressionToken.ETokenType.OPERATOR == expToken.getTokenType()) {
                 //读入一个操作符
                 if (opStack.empty()) {//如果操作栈为空
                     if (Operator.COLON == expToken.getOperator()) {
@@ -126,7 +126,7 @@ public class ExpressionExecutor {
                         ExpressionToken onTopOp = opStack.peek();
 
                         //如果栈顶元素是函数,直接将操作符压入栈
-                        if (ExpressionToken.ETokenType.ETOKEN_TYPE_FUNCTION == onTopOp.getTokenType()) {
+                        if (ExpressionToken.ETokenType.FUNCTION == onTopOp.getTokenType()) {
                             if (Operator.COLON == expToken.getOperator()) {
                                 //:操作符不可能直接遇见函数，前面必须有对应的？
                                 throw new IllegalExpressionException("在读入\"：\"时，操作栈中找不到对应的\"？\""
@@ -138,7 +138,7 @@ public class ExpressionExecutor {
                                 doPeek = false;
                             }
 
-                        } else if (ExpressionToken.ETokenType.ETOKEN_TYPE_SPLITOR == onTopOp.getTokenType()
+                        } else if (ExpressionToken.ETokenType.SPLITOR == onTopOp.getTokenType()
                                 && "(".equals(onTopOp.getSplitor())) {//如果栈顶元素是(,直接将操作符压入栈
                             if (Operator.COLON == expToken.getOperator()) {
                                 //:操作符不可能直接遇见(，前面必须有对应的？
@@ -151,7 +151,7 @@ public class ExpressionExecutor {
                                 doPeek = false;
                             }
 
-                        } else if (ExpressionToken.ETokenType.ETOKEN_TYPE_OPERATOR == onTopOp.getTokenType()) {
+                        } else if (ExpressionToken.ETokenType.OPERATOR == onTopOp.getTokenType()) {
                             //如果栈顶元素是操作符
                             if (expToken.getOperator().getPiority() > onTopOp.getOperator().getPiority()) {
                                 if (Operator.COLON == expToken.getOperator()) {
@@ -230,11 +230,11 @@ public class ExpressionExecutor {
                     }
                 }
 
-            } else if (ExpressionToken.ETokenType.ETOKEN_TYPE_FUNCTION == expToken.getTokenType()) {
+            } else if (ExpressionToken.ETokenType.FUNCTION == expToken.getTokenType()) {
                 //遇到函数名称，则使用临时变量暂存下来，等待(的来临
                 _function = expToken;
 
-            } else if (ExpressionToken.ETokenType.ETOKEN_TYPE_SPLITOR == expToken.getTokenType()) {
+            } else if (ExpressionToken.ETokenType.SPLITOR == expToken.getTokenType()) {
                 //处理读入的“（”
                 if ("(".equals(expToken.getSplitor())) {
                     //如果此时_function != null,说明是函数的左括号
@@ -265,7 +265,7 @@ public class ExpressionExecutor {
                     while (doPop && !opStack.empty()) {
                         // 从操作符栈顶弹出操作符或者函数，
                         ExpressionToken onTopOp = opStack.pop();
-                        if (ExpressionToken.ETokenType.ETOKEN_TYPE_OPERATOR == onTopOp.getTokenType()) {
+                        if (ExpressionToken.ETokenType.OPERATOR == onTopOp.getTokenType()) {
                             if (Operator.QUES == onTopOp.getOperator()) {
                                 //)分割符不可能遇到？，这说明缺少：号
                                 throw new IllegalExpressionException("在读入\")\"时，操作栈中遇到\"？\" ,缺少\":\"号"
@@ -282,7 +282,7 @@ public class ExpressionExecutor {
                                 _RPNExpList.add(onTopOp);
                             }
 
-                        } else if (ExpressionToken.ETokenType.ETOKEN_TYPE_FUNCTION == onTopOp.getTokenType()) {
+                        } else if (ExpressionToken.ETokenType.FUNCTION == onTopOp.getTokenType()) {
                             // 如果遇到函数，则说明")"是函数的右括号
                             //执行函数校验
                             ExpressionToken result = verifyFunction(onTopOp, verifyStack);
@@ -314,7 +314,7 @@ public class ExpressionExecutor {
                     while (!opStack.empty() && doPeek) {
                         ExpressionToken onTopOp = opStack.peek();
 
-                        if (ExpressionToken.ETokenType.ETOKEN_TYPE_OPERATOR == onTopOp.getTokenType()) {
+                        if (ExpressionToken.ETokenType.OPERATOR == onTopOp.getTokenType()) {
                             if (Operator.QUES == onTopOp.getOperator()) {
                                 //,分割符不可能遇到？，这说明缺少：号
                                 throw new IllegalExpressionException("在读入\",\"时，操作栈中遇到\"？\" ,缺少\":\"号"
@@ -332,11 +332,11 @@ public class ExpressionExecutor {
                                 _RPNExpList.add(onTopOp);
                             }
 
-                        } else if (ExpressionToken.ETokenType.ETOKEN_TYPE_FUNCTION == onTopOp.getTokenType()) {
+                        } else if (ExpressionToken.ETokenType.FUNCTION == onTopOp.getTokenType()) {
                             //遇见函数词元,结束弹出
                             doPeek = false;
 
-                        } else if (ExpressionToken.ETokenType.ETOKEN_TYPE_SPLITOR == onTopOp.getTokenType()
+                        } else if (ExpressionToken.ETokenType.SPLITOR == onTopOp.getTokenType()
                                 && "(".equals(onTopOp.getSplitor())) {
                             //在读入","时，操作符栈顶为"(",则报错
                             throw new IllegalExpressionException("在读入\",\"时，操作符栈顶为\"(\",,(函数丢失) 位置：" + onTopOp.getStartPosition()
@@ -358,7 +358,7 @@ public class ExpressionExecutor {
         while (!opStack.empty()) {
             ExpressionToken onTopOp = opStack.pop();
 
-            if (ExpressionToken.ETokenType.ETOKEN_TYPE_OPERATOR == onTopOp.getTokenType()) {
+            if (ExpressionToken.ETokenType.OPERATOR == onTopOp.getTokenType()) {
                 if (Operator.QUES == onTopOp.getOperator()) {
                     //遇到单一的剩下的？，这说明缺少：号
                     throw new IllegalExpressionException("操作栈中遇到剩余的\"？\" ,缺少\":\"号"
@@ -375,7 +375,7 @@ public class ExpressionExecutor {
                     _RPNExpList.add(onTopOp);
                 }
 
-            } else if (ExpressionToken.ETokenType.ETOKEN_TYPE_FUNCTION == onTopOp.getTokenType()) {
+            } else if (ExpressionToken.ETokenType.FUNCTION == onTopOp.getTokenType()) {
                 //如果剩余是函数，则函数缺少右括号")"
                 throw new IllegalExpressionException("函数" + onTopOp.getFunctionName() + "缺少\")\""
                         , onTopOp.getFunctionName()
@@ -420,11 +420,11 @@ public class ExpressionExecutor {
 
         for (ExpressionToken expToken : _RPNExpList) {
 
-            if (ExpressionToken.ETokenType.ETOKEN_TYPE_CONSTANT == expToken.getTokenType()) {
+            if (ExpressionToken.ETokenType.CONSTANT == expToken.getTokenType()) {
                 //读取一个常量，压入栈
                 compileStack.push(expToken);
 
-            } else if (ExpressionToken.ETokenType.ETOKEN_TYPE_VARIABLE == expToken.getTokenType()) {
+            } else if (ExpressionToken.ETokenType.VARIABLE == expToken.getTokenType()) {
                 //读取一个变量
                 //从上下文获取变量的实际值，将其转化成常量Token，压入栈
                 Variable varWithValue = ctx.getVariable(expToken.getVariable().getVariableName());
@@ -445,7 +445,7 @@ public class ExpressionExecutor {
                 }
 
 
-            } else if (ExpressionToken.ETokenType.ETOKEN_TYPE_OPERATOR == expToken.getTokenType()) {
+            } else if (ExpressionToken.ETokenType.OPERATOR == expToken.getTokenType()) {
                 Operator operator = expToken.getOperator();
                 //判定几元操作符
                 int opType = operator.getOpType();
@@ -455,7 +455,7 @@ public class ExpressionExecutor {
                 for (int i = 0; i < opType; i++) {
                     if (!compileStack.empty()) {
                         argToken = compileStack.pop();
-                        if (ExpressionToken.ETokenType.ETOKEN_TYPE_CONSTANT == argToken.getTokenType()) {
+                        if (ExpressionToken.ETokenType.CONSTANT == argToken.getTokenType()) {
                             args[i] = argToken.getConstant();
                         } else {
                             //如果取出的Token不是常量，则抛出错误
@@ -472,7 +472,7 @@ public class ExpressionExecutor {
                 //将引用对象压入栈
                 compileStack.push(resultToken);
 
-            } else if (ExpressionToken.ETokenType.ETOKEN_TYPE_FUNCTION == expToken.getTokenType()) {
+            } else if (ExpressionToken.ETokenType.FUNCTION == expToken.getTokenType()) {
 
                 if (!compileStack.empty()) {
 
@@ -487,7 +487,7 @@ public class ExpressionExecutor {
                         while (doPop && !compileStack.empty()) {
                             parameter = compileStack.pop();
 
-                            if (ExpressionToken.ETokenType.ETOKEN_TYPE_CONSTANT == parameter.getTokenType()) {
+                            if (ExpressionToken.ETokenType.CONSTANT == parameter.getTokenType()) {
                                 argsList.add(parameter.getConstant());
                             } else if ("(".equals(parameter.getSplitor())) {
                                 doPop = false;
@@ -522,7 +522,7 @@ public class ExpressionExecutor {
                     throw new IllegalStateException("函数" + expToken.getFunctionName() + "执行时没有找到应有的\")\"");
                 }
 
-            } else if (ExpressionToken.ETokenType.ETOKEN_TYPE_SPLITOR == expToken.getTokenType()) {
+            } else if (ExpressionToken.ETokenType.SPLITOR == expToken.getTokenType()) {
                 //读取一个分割符，压入栈，通常是"("和")"
                 compileStack.push(expToken);
 
@@ -570,7 +570,7 @@ public class ExpressionExecutor {
 
             ExpressionToken.ETokenType tokenType = token.getTokenType();
 
-            if (ETokenType.ETOKEN_TYPE_CONSTANT == tokenType) {
+            if (ETokenType.CONSTANT == tokenType) {
 
                 Constant c = token.getConstant();
                 if (BaseDataMeta.DataType.DATATYPE_BOOLEAN == c.getDataType()) {
@@ -599,16 +599,16 @@ public class ExpressionExecutor {
 
                 }
 
-            } else if (ETokenType.ETOKEN_TYPE_VARIABLE == tokenType) {
+            } else if (ETokenType.VARIABLE == tokenType) {
                 expressionText.append(token.getVariable().getVariableName()).append(" ");
 
-            } else if (ETokenType.ETOKEN_TYPE_FUNCTION == tokenType) {
+            } else if (ETokenType.FUNCTION == tokenType) {
                 expressionText.append('$').append(token.getFunctionName()).append(" ");
 
-            } else if (ETokenType.ETOKEN_TYPE_OPERATOR == tokenType) {
+            } else if (ETokenType.OPERATOR == tokenType) {
                 expressionText.append(token.getOperator().toString()).append(" ");
 
-            } else if (ETokenType.ETOKEN_TYPE_SPLITOR == tokenType) {
+            } else if (ETokenType.SPLITOR == tokenType) {
                 expressionText.append(token.getSplitor()).append(" ");
 
             }
@@ -824,10 +824,10 @@ public class ExpressionExecutor {
             if (!verifyStack.empty()) {
                 argToken = verifyStack.pop();
 
-                if (ExpressionToken.ETokenType.ETOKEN_TYPE_CONSTANT == argToken.getTokenType()) {
+                if (ExpressionToken.ETokenType.CONSTANT == argToken.getTokenType()) {
                     args[i] = argToken.getConstant();
 
-                } else if (ExpressionToken.ETokenType.ETOKEN_TYPE_VARIABLE == argToken.getTokenType()) {
+                } else if (ExpressionToken.ETokenType.VARIABLE == argToken.getTokenType()) {
                     args[i] = argToken.getVariable();
 
                 } else {
@@ -877,11 +877,11 @@ public class ExpressionExecutor {
             while (doPop && !verifyStack.empty()) {
                 parameter = verifyStack.pop();
 
-                if (ExpressionToken.ETokenType.ETOKEN_TYPE_CONSTANT == parameter.getTokenType()) {
+                if (ExpressionToken.ETokenType.CONSTANT == parameter.getTokenType()) {
                     //常量
                     args.add(parameter.getConstant());
 
-                } else if (ExpressionToken.ETokenType.ETOKEN_TYPE_VARIABLE == parameter.getTokenType()) {
+                } else if (ExpressionToken.ETokenType.VARIABLE == parameter.getTokenType()) {
                     args.add(parameter.getVariable());
 
                 } else if ("(".equals(parameter.getSplitor())) {

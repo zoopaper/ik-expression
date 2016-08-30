@@ -17,19 +17,29 @@ import org.wltea.expression.op.Operator;
  *          2008-09-18
  */
 public class ExpressionToken {
-
-
-    //Token的词元类型：常量，变量，操作符，函数，分割符
+    /**
+     * Token的词元类型：常量，变量，操作符，函数，分割符
+     */
     private ETokenType tokenType;
-    //当TokenType = ETOKEN_TYPE_CONSTANT 时,constant存储常量描述
+    /**
+     * 当TokenType = CONSTANT 时,constant存储常量描述
+     */
     private Constant constant;
-    //当TokenType = ETOKEN_TYPE_VARIABLE 时,variable存储变量描述
+    /**
+     * 当TokenType = VARIABLE 时,variable存储变量描述
+     */
     private Variable variable;
-    //当TokenType = ETOKEN_TYPE_OPERATOR 时, operator存储操做符描述
+    /**
+     * 当TokenType = OPERATOR 时, operator存储操做符描述
+     */
     private Operator operator;
-    //存储字符描述
+    /**
+     * 存储字符描述
+     */
     private String tokenText;
-    //词元在表达式中的起始位置
+    /**
+     * 词元在表达式中的起始位置
+     */
     private int startPosition = -1;
 
     /**
@@ -41,7 +51,7 @@ public class ExpressionToken {
     public static ExpressionToken createConstantToken(DataType dataType, Object dataValue) {
         ExpressionToken instance = new ExpressionToken();
         instance.constant = new Constant(dataType, dataValue);
-        instance.tokenType = ETokenType.ETOKEN_TYPE_CONSTANT;
+        instance.tokenType = ETokenType.CONSTANT;
         if (dataValue != null) {
             instance.tokenText = instance.constant.getDataValueText();
         }
@@ -54,7 +64,7 @@ public class ExpressionToken {
         }
         ExpressionToken instance = new ExpressionToken();
         instance.constant = constant;
-        instance.tokenType = ETokenType.ETOKEN_TYPE_CONSTANT;
+        instance.tokenType = ETokenType.CONSTANT;
         if (constant.getDataValue() != null) {
             instance.tokenText = constant.getDataValueText();
         }
@@ -64,7 +74,7 @@ public class ExpressionToken {
     public static ExpressionToken createVariableToken(String variableName) {
         ExpressionToken instance = new ExpressionToken();
         instance.variable = new Variable(variableName);
-        instance.tokenType = ETokenType.ETOKEN_TYPE_VARIABLE;
+        instance.tokenType = ETokenType.VARIABLE;
         instance.tokenText = variableName;
         return instance;
     }
@@ -72,7 +82,7 @@ public class ExpressionToken {
     public static ExpressionToken createReference(Reference ref) {
         ExpressionToken instance = new ExpressionToken();
         instance.constant = new Constant(ref);
-        instance.tokenType = ETokenType.ETOKEN_TYPE_CONSTANT;
+        instance.tokenType = ETokenType.CONSTANT;
         if (ref != null) {
             instance.tokenText = instance.constant.getDataValueText();
         }
@@ -85,7 +95,7 @@ public class ExpressionToken {
         }
         ExpressionToken instance = new ExpressionToken();
         instance.tokenText = functionName;
-        instance.tokenType = ETokenType.ETOKEN_TYPE_FUNCTION;
+        instance.tokenType = ETokenType.FUNCTION;
         return instance;
     }
 
@@ -96,7 +106,7 @@ public class ExpressionToken {
         ExpressionToken instance = new ExpressionToken();
         instance.operator = operator;
         instance.tokenText = operator.getToken();
-        instance.tokenType = ETokenType.ETOKEN_TYPE_OPERATOR;
+        instance.tokenType = ETokenType.OPERATOR;
         return instance;
     }
 
@@ -106,7 +116,7 @@ public class ExpressionToken {
         }
         ExpressionToken instance = new ExpressionToken();
         instance.tokenText = splitorText;
-        instance.tokenType = ETokenType.ETOKEN_TYPE_SPLITOR;
+        instance.tokenType = ETokenType.SPLITOR;
         return instance;
     }
 
@@ -178,17 +188,29 @@ public class ExpressionToken {
         return tokenText;
     }
 
-    //词元的语法类型
+    /**
+     * 词元的语法类型
+     */
     public enum ETokenType {
-        //常量
-        ETOKEN_TYPE_CONSTANT,
-        //变量
-        ETOKEN_TYPE_VARIABLE,
-        //操作符
-        ETOKEN_TYPE_OPERATOR,
-        //函数
-        ETOKEN_TYPE_FUNCTION,
-        //分隔符
-        ETOKEN_TYPE_SPLITOR,;
+        /**
+         * 常量
+         */
+        CONSTANT,
+        /**
+         * 变量
+         */
+        VARIABLE,
+        /**
+         * 操作符
+         */
+        OPERATOR,
+        /**
+         * 函数
+         */
+        FUNCTION,
+        /**
+         * 分隔符
+         */
+        SPLITOR,;
     }
 }

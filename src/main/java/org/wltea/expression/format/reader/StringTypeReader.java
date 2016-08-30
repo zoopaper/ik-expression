@@ -18,10 +18,18 @@ import java.io.IOException;
  *          Sep 21, 2008
  */
 public class StringTypeReader implements ElementReader {
-    public static final char START_MARK = '"';//字符窜开始标志
-    public static final char END_MARK = '"';//字符窜结束标志
-
-    public static final char ESCAPE_MARK = '\\';//转义符号
+    /**
+     * 字符窜开始标志
+     */
+    public static final char START_MARK = '"';
+    /**
+     * 字符窜结束标志
+     */
+    public static final char END_MARK = '"';
+    /**
+     * 转义符号
+     */
+    public static final char ESCAPE_MARK = '\\';
 
     /**
      * 可转义字符有\"nt
@@ -46,23 +54,24 @@ public class StringTypeReader implements ElementReader {
     /**
      * 从流中读取字符窜类型的ExpressionToken
      *
-     * @param sr
+     * @param expressionReader
      * @return ExpressionToken
      * @throws FormatException 不是合法的字符窜类型时抛出
      * @throws IOException
      */
-    public Element read(ExpressionReader sr) throws FormatException, IOException {
-        int index = sr.getCurrentIndex();
+    public Element read(ExpressionReader expressionReader) throws FormatException, IOException {
+        int index = expressionReader.getCurrentIndex();
         StringBuffer sb = new StringBuffer();
-        int b = sr.read();
+        int b = expressionReader.read();
         if (b == -1 || b != START_MARK) {
-            throw new FormatException("不是有效的字符窜开始");
+            throw new FormatException("不是有效的字符串开始");
         }
 
-        while ((b = sr.read()) != -1) {
+        while ((b = expressionReader.read()) != -1) {
             char c = (char) b;
-            if (c == ESCAPE_MARK) {//遇到转义字符
-                c = getEscapeValue((char) sr.read());
+            //遇到转义字符
+            if (c == ESCAPE_MARK) {
+                c = getEscapeValue((char) expressionReader.read());
             } else if (c == END_MARK) {//遇到非转义的引号
                 return new Element(sb.toString(), index, ElementType.STRING);
             }

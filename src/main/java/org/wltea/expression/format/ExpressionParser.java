@@ -54,8 +54,8 @@ public class ExpressionParser {
         operators.put(Operator.COLON.getToken(), Operator.COLON);
 
     }
-
-    private Stack<String> parenthesis = new Stack<String>();//匹配圆括号的栈
+    //匹配圆括号的栈
+    private Stack<String> parenthesis = new Stack<String>();
 
     public static void main(String[] s) {
         String expression = "$CALCDATE($SYSDATE() ,0,0 , 7,0 ,0,aa ) > [2008-10-01]";
@@ -96,7 +96,7 @@ public class ExpressionParser {
         try {
             while ((ele = expressionReader.readToken()) != null) {
                 expressionToken = changeToToken(expressionToken, ele);
-                //如果是括号，则记录下来，最后进行最后进行匹配
+                //如果是括号，则记录下来，最后进行匹配
                 pushParenthesis(ele);
                 list.add(expressionToken);
             }
@@ -109,7 +109,6 @@ public class ExpressionParser {
         if (!parenthesis.isEmpty()) {
             throw new FormatException("括号匹配出错");
         }
-
         return list;
     }
 
@@ -171,8 +170,8 @@ public class ExpressionParser {
             //区分负号
             if (ele.getText().equals("-") && (
                     previousToken == null //以“-”开头肯定是负号
-                            || previousToken.getTokenType() == ETokenType.ETOKEN_TYPE_OPERATOR //运算符后面肯定是负号
-                            || previousToken.getTokenType() == ETokenType.ETOKEN_TYPE_SPLITOR //“(”或“,”后面肯定是负号
+                            || previousToken.getTokenType() == ETokenType.OPERATOR //运算符后面肯定是负号
+                            || previousToken.getTokenType() == ETokenType.SPLITOR //“(”或“,”后面肯定是负号
                             && !")".equals(previousToken.getSplitor())
             )) {
                 token = ExpressionToken.createOperatorToken(Operator.NG);

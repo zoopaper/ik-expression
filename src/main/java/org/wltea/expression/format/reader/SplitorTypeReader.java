@@ -24,14 +24,14 @@ public class SplitorTypeReader implements ElementReader {
     /**
      * 从流中读取分割符类型的ExpressionToken
      *
-     * @param sr
+     * @param expressionReader
      * @return
      * @throws FormatException 不是合法的分割符类型时抛出
      * @throws IOException
      */
-    public Element read(ExpressionReader sr) throws FormatException, IOException {
-        int index = sr.getCurrentIndex();
-        int b = sr.read();
+    public Element read(ExpressionReader expressionReader) throws FormatException, IOException {
+        int index = expressionReader.getCurrentIndex();
+        int b = expressionReader.read();
         char c = (char) b;
         if (b == -1 || SPLITOR_CHAR.indexOf(c) == -1) {
             throw new FormatException("不是有效的分割字符");
