@@ -14,7 +14,7 @@ import org.wltea.expression.op.Operator;
 /**
  * 逻辑不等于操作
  *
- * @author 林良益，卓诗垚
+ * @author xxxx
  * @version 2.0
  *          Sep 27, 2008
  */

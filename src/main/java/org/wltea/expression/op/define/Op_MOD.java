@@ -13,7 +13,7 @@ import org.wltea.expression.op.Operator;
 /**
  * 算术取模操作
  *
- * @author 林良益，卓诗垚
+ * @author xxxx
  * @version 2.0
  *          Sep 26, 2008
  */

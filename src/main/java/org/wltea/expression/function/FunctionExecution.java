@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * 运算符及内嵌方法调用
  *
- * @author 林良益，卓诗垚
+ * @author xxxx
  * @version 2.0
  *          2008-09-18
  */

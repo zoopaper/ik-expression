@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * @author 林良益，卓诗垚
+ * @author xxxx
  * @version 2.0
  *          Sep 23, 2008
  */

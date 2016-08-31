@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * 集合添加操作
  *
- * @author 林良益，卓诗垚
+ * @author xxxx
  * @version 2.0
  *          Oct 8, 2008
  */

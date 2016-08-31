@@ -13,7 +13,7 @@ import java.io.IOException;
 /**
  * 读取分割符类型
  *
- * @author 林良益，卓诗垚
+ * @author xxxx
  * @version 2.0
  *          Sep 21, 2008
  */

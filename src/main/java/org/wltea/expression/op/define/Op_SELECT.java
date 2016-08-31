@@ -12,7 +12,7 @@ import org.wltea.expression.op.IOperatorExecution;
 import org.wltea.expression.op.Operator;
 
 /**
- * @author 林良益，卓诗垚
+ * @author xxxx
  * @version 2.0
  *          2009-02-03
  */

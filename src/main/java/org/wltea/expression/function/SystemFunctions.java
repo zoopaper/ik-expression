@@ -11,7 +11,7 @@ import java.util.GregorianCalendar;
 /**
  * 系统默认函数
  *
- * @author 林良益，卓诗垚
+ * @author xxxx
  * @version 2.0
  *          Feb 3, 2009
  */

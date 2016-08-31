@@ -14,7 +14,7 @@ import org.wltea.expression.op.Operator;
  * 减号操作实现
  * 数学减法操作
  *
- * @author 林良益，卓诗垚
+ * @author xxxx
  * @version 2.0
  *          2008-09-26
  */

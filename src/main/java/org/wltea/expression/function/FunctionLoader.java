@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * 表达式中函数加载器，从配置文件中加载可用的外部方法
  *
- * @author 林良益，卓诗垚
+ * @author xxxx
  * @version 2.0
  *          Feb 3, 2009
  */

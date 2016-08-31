@@ -14,7 +14,7 @@ import org.wltea.expression.op.Operator;
 /**
  * 逻辑与操作
  *
- * @author 林良益，卓诗垚
+ * @author xxxx
  * @version 2.0
  *          Sep 27, 2008
  */
@@ -22,9 +22,7 @@ public class Op_AND implements IOperatorExecution {
 
     public static final Operator THIS_OPERATOR = Operator.AND;
 
-    /* (non-Javadoc)
-     * @see org.wltea.expression.op.IOperatorExecution#execute(org.wltea.expression.ExpressionToken[])
-     */
+
     public Constant execute(Constant[] args) throws IllegalExpressionException {
         //参数校验
         if (args == null || args.length != 2) {

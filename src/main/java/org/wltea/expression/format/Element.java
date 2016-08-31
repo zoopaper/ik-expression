@@ -8,7 +8,7 @@ package org.wltea.expression.format;
  *
  * @version 2.0
  *          Sep 23, 2008
- * @@author 林良益，卓诗垚
+ * @@author xxxx
  */
 public class Element {
 

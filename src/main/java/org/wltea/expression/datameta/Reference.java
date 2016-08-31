@@ -15,7 +15,7 @@ import org.wltea.expression.op.Operator;
 /**
  * 引用对象
  *
- * @author 林良益，卓诗垚
+ * @author xxxx
  * @version 2.0
  *          2009-02-07
  */

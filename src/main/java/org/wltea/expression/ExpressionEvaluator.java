@@ -14,7 +14,7 @@ import java.util.List;
  * IK-Expression 表达式解析器（主入口程序）
  * ExpressionEvaluator 是多线程安全的
  *
- * @author 林良益，卓诗垚
+ * @author xxxx
  * @version 2.0
  *          Sep 25, 2008
  */
