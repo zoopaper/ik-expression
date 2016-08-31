@@ -146,6 +146,11 @@ public enum Operator {
     private int priority;
     private int opType;
 
+    /**
+     * @param token
+     * @param priority
+     * @param opType
+     */
     Operator(String token, int priority, int opType) {
         this.token = token;
         this.priority = priority;
@@ -212,8 +217,8 @@ public enum Operator {
      * 如果合法，则返回含有执行结果类型的Token
      * 如果不合法，则返回null
      *
-     * @param opPosition 操作符位置
-     * @param baseDataMeta      注意args中的参数由于是从栈中按LIFO顺序弹出的，所以必须从尾部倒着取数
+     * @param opPosition   操作符位置
+     * @param baseDataMeta 注意args中的参数由于是从栈中按LIFO顺序弹出的，所以必须从尾部倒着取数
      * @return Constant 常量型的执行结果
      */
     public Constant verify(int opPosition, BaseDataMeta[] baseDataMeta) throws IllegalExpressionException {

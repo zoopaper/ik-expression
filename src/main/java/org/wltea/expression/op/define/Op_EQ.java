@@ -21,11 +21,7 @@ public class Op_EQ implements IOperatorExecution {
 
     public static final Operator THIS_OPERATOR = Operator.EQ;
 
-    /* (non-Javadoc)
-     * @see org.wltea.expression.op.IOperatorExecution#execute(org.wltea.expression.ExpressionToken[])
-     */
     public Constant execute(Constant[] args) throws IllegalExpressionException {
-
         if (args == null || args.length != 2) {
             throw new IllegalArgumentException("操作符\"" + THIS_OPERATOR.getToken() + "参数个数不匹配");
         }
@@ -49,8 +45,7 @@ public class Op_EQ implements IOperatorExecution {
 
 
         //集合类型EQ运算单独处理
-        if (BaseDataMeta.DataType.DATATYPE_LIST == first.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_LIST == second.getDataType()) {
+        if (BaseDataMeta.DataType.DATATYPE_LIST == first.getDataType() || BaseDataMeta.DataType.DATATYPE_LIST == second.getDataType()) {
             //目前不支持集合EQ比较，（太麻烦鸟）.考虑使用后期使用函数实现
             throw new IllegalArgumentException("操作符\"" + THIS_OPERATOR.getToken() + "\"参数类型错误");
 
@@ -63,7 +58,6 @@ public class Op_EQ implements IOperatorExecution {
             } else {
                 return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.FALSE);
             }
-
         } else if (BaseDataMeta.DataType.DATATYPE_NULL == second.getDataType()) {
             if (null == first.getDataValue()) {
                 return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.TRUE);
@@ -72,8 +66,7 @@ public class Op_EQ implements IOperatorExecution {
             }
 
         } else {
-            if (BaseDataMeta.DataType.DATATYPE_BOOLEAN == first.getDataType()
-                    && BaseDataMeta.DataType.DATATYPE_BOOLEAN == second.getDataType()) {
+            if (BaseDataMeta.DataType.DATATYPE_BOOLEAN == first.getDataType() && BaseDataMeta.DataType.DATATYPE_BOOLEAN == second.getDataType()) {
                 Boolean firstValue = first.getBooleanValue();
                 Boolean secondValue = second.getBooleanValue();
                 if (firstValue != null) {
@@ -84,8 +77,7 @@ public class Op_EQ implements IOperatorExecution {
                     return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.FALSE);
                 }
 
-            } else if (BaseDataMeta.DataType.DATATYPE_DATE == first.getDataType()
-                    && BaseDataMeta.DataType.DATATYPE_DATE == second.getDataType()) {
+            } else if (BaseDataMeta.DataType.DATATYPE_DATE == first.getDataType() && BaseDataMeta.DataType.DATATYPE_DATE == second.getDataType()) {
                 //日期比较精确到秒
                 String firstValue = first.getDataValueText();
                 String secondValue = second.getDataValueText();
@@ -97,8 +89,7 @@ public class Op_EQ implements IOperatorExecution {
                     return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.FALSE);
                 }
 
-            } else if (BaseDataMeta.DataType.DATATYPE_STRING == first.getDataType()
-                    && BaseDataMeta.DataType.DATATYPE_STRING == second.getDataType()) {
+            } else if (BaseDataMeta.DataType.DATATYPE_STRING == first.getDataType() && BaseDataMeta.DataType.DATATYPE_STRING == second.getDataType()) {
                 String firstValue = first.getStringValue();
                 String secondValue = second.getStringValue();
                 if (firstValue != null) {

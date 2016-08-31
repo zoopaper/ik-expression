@@ -4,14 +4,14 @@ import org.wltea.expression.datameta.Variable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 表达式计算，过程中用到的变量或者函数。
  *
  * @author deonwu
  */
-public class ExpressionContext extends HashMap<String, Object> {
-
+public class ExpressionContext extends ConcurrentHashMap<String, Object> {
     private static final long serialVersionUID = -373852423907495496L;
     private Evaluator evaluator = null;
 
@@ -24,7 +24,7 @@ public class ExpressionContext extends HashMap<String, Object> {
     private boolean isStrict = true;
 
     public Variable getVariable(String variableName) {
-        Object obj = null; //this.get(variableName);
+        Object obj = null;
         Variable var = null;
 
         if (containsKey(variableName)) {

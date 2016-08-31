@@ -143,8 +143,8 @@ public class ExpressionEvaluator {
     /**
      * 根据流程上下文，执行公式语言
      *
-     * @param expression
-     * @param variables
+     * @param expression 表达式字符串
+     * @param variables  变量集合
      * @return
      */
     public static Object evaluate(String expression, Collection<Variable> variables) {
@@ -152,8 +152,7 @@ public class ExpressionEvaluator {
         //获取上下文的变量，设置到脚本执行器中
         if (variables != null && variables.size() > 0) {
             for (Variable var : variables) {
-                //添加变来到脚本变量容器
-                //VariableContainer.addVariable(var);
+                //添加变量到脚本变量容器
                 ctx.put(var.getVariableName(), var);
             }
         }
@@ -174,6 +173,7 @@ public class ExpressionEvaluator {
 
     /**
      * 根据流程上下文，执行公式语言
+     *
      * @param expression
      * @param ctx
      * @param evaluator

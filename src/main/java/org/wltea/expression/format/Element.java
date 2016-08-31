@@ -13,8 +13,14 @@ package org.wltea.expression.format;
 public class Element {
 
     private String text;
-    private ElementType type;//类型
-    private int index;//元素在表达式中的起始索引号，从0算起
+    /**
+     * 类型
+     */
+    private ElementType type;
+    /**
+     * 元素在表达式中的起始索引号，从0算起
+     */
+    private int index;
 
     /**
      * 构造
@@ -54,30 +60,54 @@ public class Element {
     }
 
     public enum ElementType {
-        //NULL类型
+        /**
+         * NULL类型
+         */
         NULL,
-        //字符串
+        /**
+         * 字符串
+         */
         STRING,
-        //布尔类
+        /**
+         * 布尔类
+         */
         BOOLEAN,
-        //整数
+        /**
+         * 整数
+         */
         INT,
-        //长整数
+        /**
+         * 长整数
+         */
         LONG,
-        //浮点数
+        /**
+         * 浮点数
+         */
         FLOAT,
-        //双精度浮点
+        /**
+         * 双精度浮点
+         */
         DOUBLE,
-        //日期时间
+        /**
+         * 日期时间
+         */
         DATE,
 
-        //变量
+        /**
+         * 变量
+         */
         VARIABLE,
-        //操作符
+        /**
+         * 操作符
+         */
         OPERATOR,
-        //函数
+        /**
+         * 函数
+         */
         FUNCTION,
-        //分隔符
+        /**
+         * 分隔符
+         */
         SPLITOR
     }
 }

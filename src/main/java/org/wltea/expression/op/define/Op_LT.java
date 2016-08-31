@@ -21,9 +21,7 @@ public class Op_LT implements IOperatorExecution {
 
     public static final Operator THIS_OPERATOR = Operator.LT;
 
-    /* (non-Javadoc)
-     * @see org.wltea.expression.op.IOperatorExecution#execute(org.wltea.expression.ExpressionToken[])
-     */
+
     public Constant execute(Constant[] args) throws IllegalExpressionException {
         if (args == null || args.length != 2) {
             throw new IllegalArgumentException("操作符\"" + THIS_OPERATOR.getToken() + "参数个数不匹配");

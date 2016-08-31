@@ -29,10 +29,10 @@ import java.util.Stack;
  *          2008-09-18
  */
 public class ExpressionExecutor {
-    private ExpressionContext ctx = null;
+    private ExpressionContext expressionContext = null;
 
-    public ExpressionExecutor(ExpressionContext ctx) {
-        this.ctx = ctx;
+    public ExpressionExecutor(ExpressionContext expressionContext) {
+        this.expressionContext = expressionContext;
     }
 
     /**
@@ -83,10 +83,9 @@ public class ExpressionExecutor {
                 _RPNExpList.add(expToken);
                 //同时压入校验栈
                 verifyStack.push(expToken);
-
             } else if (ExpressionToken.ETokenType.VARIABLE == expToken.getTokenType()) {
                 //验证变量声明
-                Variable var = ctx.getVariable(expToken.getVariable().getVariableName());
+                Variable var = expressionContext.getVariable(expToken.getVariable().getVariableName());
                 if (var == null) {
                     //当变量没有定义时，视为null型
                     expToken.getVariable().setDataType(DataType.DATATYPE_NULL);
@@ -104,8 +103,6 @@ public class ExpressionExecutor {
                 _RPNExpList.add(expToken);
                 //同时压入校验栈
                 verifyStack.push(expToken);
-
-
             } else if (ExpressionToken.ETokenType.OPERATOR == expToken.getTokenType()) {
                 //读入一个操作符
                 if (opStack.empty()) {//如果操作栈为空
@@ -423,28 +420,19 @@ public class ExpressionExecutor {
             if (ExpressionToken.ETokenType.CONSTANT == expToken.getTokenType()) {
                 //读取一个常量，压入栈
                 compileStack.push(expToken);
-
             } else if (ExpressionToken.ETokenType.VARIABLE == expToken.getTokenType()) {
-                //读取一个变量
-                //从上下文获取变量的实际值，将其转化成常量Token，压入栈
-                Variable varWithValue = ctx.getVariable(expToken.getVariable().getVariableName());
+                //读取一个变量,从上下文获取变量的实际值，将其转化成常量Token，压入栈
+                Variable varWithValue = expressionContext.getVariable(expToken.getVariable().getVariableName());
                 if (varWithValue != null) {
                     //生成一个有值常量，varWithValue.getDataValue有可能是空值
-                    ExpressionToken constantToken = ExpressionToken.createConstantToken(
-                            varWithValue.getDataType()
-                            , varWithValue.getDataValue());
+                    ExpressionToken constantToken = ExpressionToken.createConstantToken(varWithValue.getDataType(), varWithValue.getDataValue());
                     compileStack.push(constantToken);
-
                 } else {
                     //throw new IllegalStateException("变量\"" +expToken.getVariable().getVariableName() + "\"不是上下文合法变量" );
                     //当变量没有定义时，视为null型
-                    ExpressionToken constantToken = ExpressionToken.createConstantToken(
-                            DataType.DATATYPE_NULL
-                            , null);
+                    ExpressionToken constantToken = ExpressionToken.createConstantToken(DataType.DATATYPE_NULL, null);
                     compileStack.push(constantToken);
                 }
-
-
             } else if (ExpressionToken.ETokenType.OPERATOR == expToken.getTokenType()) {
                 Operator operator = expToken.getOperator();
                 //判定几元操作符
@@ -467,7 +455,7 @@ public class ExpressionExecutor {
                     }
                 }
                 //构造引用常量对象
-                Reference ref = new Reference(expToken, args, ctx.isStrict());
+                Reference ref = new Reference(expToken, args, expressionContext.isStrict());
                 ExpressionToken resultToken = ExpressionToken.createReference(ref);
                 //将引用对象压入栈
                 compileStack.push(resultToken);
@@ -525,11 +513,10 @@ public class ExpressionExecutor {
             } else if (ExpressionToken.ETokenType.SPLITOR == expToken.getTokenType()) {
                 //读取一个分割符，压入栈，通常是"("和")"
                 compileStack.push(expToken);
-
             }
         }
 
-        ConstantEvaluator evaluator = new ConstantEvaluator(ctx.getEvaluator());
+        ConstantEvaluator evaluator = new ConstantEvaluator(expressionContext.getEvaluator());
 
         //表达式编译完成，这是编译栈内应该只有一个编译结果
         if (compileStack.size() == 1) {
@@ -809,9 +796,10 @@ public class ExpressionExecutor {
     /**
      * 执行操作符校验
      *
-     * @param op
+     * @param opToken
      * @param verifyStack
      * @return
+     * @throws IllegalExpressionException
      */
     private ExpressionToken verifyOperator(ExpressionToken opToken, Stack<ExpressionToken> verifyStack) throws IllegalExpressionException {
         //判定几元操作符
@@ -846,7 +834,7 @@ public class ExpressionExecutor {
         }
         //执行操作符校验，并返回校验
         Constant result = null;
-        if (ctx.isStrict()) {
+        if (expressionContext.isStrict()) {
             result = op.verify(opToken.getStartPosition(), args);
         } else {
             if (op.getOpType() != args.length) {
@@ -862,9 +850,10 @@ public class ExpressionExecutor {
     /**
      * 执行函数校验
      *
-     * @param op
+     * @param funtionToken
      * @param verifyStack
      * @return
+     * @throws IllegalExpressionException
      */
     private ExpressionToken verifyFunction(ExpressionToken funtionToken, Stack<ExpressionToken> verifyStack) throws IllegalExpressionException {
 
