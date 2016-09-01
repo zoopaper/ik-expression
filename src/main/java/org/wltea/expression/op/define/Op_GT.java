@@ -53,43 +53,43 @@ public class Op_GT implements IOperatorExecution {
         }
 
 
-        if (BaseDataMeta.DataType.DATATYPE_DATE == first.getDataType()
-                && BaseDataMeta.DataType.DATATYPE_DATE == second.getDataType()) {
+        if (BaseDataMeta.DataType.DATE == first.getDataType()
+                && BaseDataMeta.DataType.DATE == second.getDataType()) {
             //日期类型比较
             int result = first.getDateValue().compareTo(second.getDateValue());
             if (result > 0) {
-                return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.TRUE);
+                return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.TRUE);
             } else {
-                return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.FALSE);
+                return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.FALSE);
             }
 
-        } else if (BaseDataMeta.DataType.DATATYPE_STRING == first.getDataType()
-                && BaseDataMeta.DataType.DATATYPE_STRING == second.getDataType()) {
+        } else if (BaseDataMeta.DataType.STRING == first.getDataType()
+                && BaseDataMeta.DataType.STRING == second.getDataType()) {
             //字窜类型比较
             int result = first.getStringValue().compareTo(second.getStringValue());
             if (result > 0) {
-                return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.TRUE);
+                return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.TRUE);
             } else {
-                return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.FALSE);
+                return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.FALSE);
             }
 
-        } else if ((BaseDataMeta.DataType.DATATYPE_DOUBLE == first.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_FLOAT == first.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_LONG == first.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_INT == first.getDataType())
+        } else if ((BaseDataMeta.DataType.DOUBLE == first.getDataType()
+                || BaseDataMeta.DataType.FLOAT == first.getDataType()
+                || BaseDataMeta.DataType.LONG == first.getDataType()
+                || BaseDataMeta.DataType.INT == first.getDataType())
                 &&
-                (BaseDataMeta.DataType.DATATYPE_DOUBLE == second.getDataType()
-                        || BaseDataMeta.DataType.DATATYPE_FLOAT == second.getDataType()
-                        || BaseDataMeta.DataType.DATATYPE_LONG == second.getDataType()
-                        || BaseDataMeta.DataType.DATATYPE_INT == second.getDataType())
+                (BaseDataMeta.DataType.DOUBLE == second.getDataType()
+                        || BaseDataMeta.DataType.FLOAT == second.getDataType()
+                        || BaseDataMeta.DataType.LONG == second.getDataType()
+                        || BaseDataMeta.DataType.INT == second.getDataType())
 
                 ) {
             //数值类型比较，全部转换成double
             int result = Double.compare(first.getDoubleValue(), second.getDoubleValue());
             if (result > 0) {
-                return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.TRUE);
+                return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.TRUE);
             } else {
-                return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.FALSE);
+                return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.FALSE);
             }
         } else {
             //GT操作不支持其他类型，抛异常
@@ -121,29 +121,29 @@ public class Op_GT implements IOperatorExecution {
             throw new NullPointerException("操作符\"" + THIS_OPERATOR.getToken() + "\"参数为空");
         }
 
-        if (BaseDataMeta.DataType.DATATYPE_DATE == first.getDataType()
-                && BaseDataMeta.DataType.DATATYPE_DATE == second.getDataType()) {
+        if (BaseDataMeta.DataType.DATE == first.getDataType()
+                && BaseDataMeta.DataType.DATE == second.getDataType()) {
             //日期类型比较
-            return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.FALSE);
+            return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.FALSE);
 
-        } else if (BaseDataMeta.DataType.DATATYPE_STRING == first.getDataType()
-                && BaseDataMeta.DataType.DATATYPE_STRING == second.getDataType()) {
+        } else if (BaseDataMeta.DataType.STRING == first.getDataType()
+                && BaseDataMeta.DataType.STRING == second.getDataType()) {
             //字窜类型比较
-            return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.FALSE);
+            return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.FALSE);
 
-        } else if ((BaseDataMeta.DataType.DATATYPE_DOUBLE == first.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_FLOAT == first.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_LONG == first.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_INT == first.getDataType())
+        } else if ((BaseDataMeta.DataType.DOUBLE == first.getDataType()
+                || BaseDataMeta.DataType.FLOAT == first.getDataType()
+                || BaseDataMeta.DataType.LONG == first.getDataType()
+                || BaseDataMeta.DataType.INT == first.getDataType())
                 &&
-                (BaseDataMeta.DataType.DATATYPE_DOUBLE == second.getDataType()
-                        || BaseDataMeta.DataType.DATATYPE_FLOAT == second.getDataType()
-                        || BaseDataMeta.DataType.DATATYPE_LONG == second.getDataType()
-                        || BaseDataMeta.DataType.DATATYPE_INT == second.getDataType())
+                (BaseDataMeta.DataType.DOUBLE == second.getDataType()
+                        || BaseDataMeta.DataType.FLOAT == second.getDataType()
+                        || BaseDataMeta.DataType.LONG == second.getDataType()
+                        || BaseDataMeta.DataType.INT == second.getDataType())
 
                 ) {
             //数值类型比较
-            return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.FALSE);
+            return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.FALSE);
 
         } else {
             //GT操作不支持其他类型，抛异常

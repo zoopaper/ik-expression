@@ -102,7 +102,7 @@ public class ConstantEvaluator implements Evaluator<Constant> {
             }
         }
 
-        return new Constant(DataType.DATATYPE_OBJECT, obj);
+        return new Constant(DataType.OBJECT, obj);
     }
 
     @Override

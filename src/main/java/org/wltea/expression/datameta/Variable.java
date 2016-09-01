@@ -15,20 +15,20 @@ import java.util.List;
  */
 public class Variable extends BaseDataMeta {
 
-    //变量名
+    /**
+     * 变量名
+     */
     String variableName;
 
     public Variable(String variableName) {
         this(variableName, null, null);
     }
 
-    public Variable(String variableName, DataType variableDataType, Object variableValue) {
-        super(variableDataType, variableValue);
-
+    public Variable(String variableName, DataType dataType, Object value) {
+        super(dataType, value);
         if (variableName == null) {
             throw new IllegalArgumentException("非法参数：变量名为空");
         }
-
         this.variableName = variableName;
     }
 
@@ -42,34 +42,34 @@ public class Variable extends BaseDataMeta {
     public static Variable createVariable(String variableName, Object variableValue) {
 
         if (variableValue instanceof Boolean) {
-            return new Variable(variableName, DataType.DATATYPE_BOOLEAN, variableValue);
+            return new Variable(variableName, DataType.BOOLEAN, variableValue);
 
         } else if (variableValue instanceof Date) {
-            return new Variable(variableName, DataType.DATATYPE_DATE, variableValue);
+            return new Variable(variableName, DataType.DATE, variableValue);
 
         } else if (variableValue instanceof Double) {
-            return new Variable(variableName, DataType.DATATYPE_DOUBLE, variableValue);
+            return new Variable(variableName, DataType.DOUBLE, variableValue);
 
         } else if (variableValue instanceof Float) {
-            return new Variable(variableName, DataType.DATATYPE_FLOAT, variableValue);
+            return new Variable(variableName, DataType.FLOAT, variableValue);
 
         } else if (variableValue instanceof Integer) {
-            return new Variable(variableName, DataType.DATATYPE_INT, variableValue);
+            return new Variable(variableName, DataType.INT, variableValue);
 
         } else if (variableValue instanceof Long) {
-            return new Variable(variableName, DataType.DATATYPE_LONG, variableValue);
+            return new Variable(variableName, DataType.LONG, variableValue);
 
         } else if (variableValue instanceof String) {
-            return new Variable(variableName, DataType.DATATYPE_STRING, variableValue);
+            return new Variable(variableName, DataType.STRING, variableValue);
 
         } else if (variableValue instanceof List) {
-            return new Variable(variableName, DataType.DATATYPE_LIST, variableValue);
+            return new Variable(variableName, DataType.LIST, variableValue);
 
         } else if (variableValue instanceof Object) {
-            return new Variable(variableName, DataType.DATATYPE_OBJECT, variableValue);
+            return new Variable(variableName, DataType.OBJECT, variableValue);
 
         } else if (variableValue == null) {
-            return new Variable(variableName, DataType.DATATYPE_NULL, variableValue);
+            return new Variable(variableName, DataType.NULL, variableValue);
 
         } else {
             throw new IllegalArgumentException("非法参数：无法识别的变量类型");
@@ -108,7 +108,6 @@ public class Variable extends BaseDataMeta {
             } else {
                 return false;
             }
-
         } else {
             return false;
         }

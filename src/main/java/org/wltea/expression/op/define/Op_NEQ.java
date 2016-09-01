@@ -49,75 +49,75 @@ public class Op_NEQ implements IOperatorExecution {
         }
 
         //集合类型EQ运算单独处理
-        if (BaseDataMeta.DataType.DATATYPE_LIST == first.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_LIST == second.getDataType()) {
+        if (BaseDataMeta.DataType.LIST == first.getDataType()
+                || BaseDataMeta.DataType.LIST == second.getDataType()) {
             //目前不支持集合EQ比较，（太麻烦鸟）.考虑使用后期使用函数实现
             throw new IllegalArgumentException("操作符\"" + THIS_OPERATOR.getToken() + "\"参数类型错误");
 
         }
 
         //NEQ支持不同类型数据的null比较，专门对null的判断
-        if (BaseDataMeta.DataType.DATATYPE_NULL == first.getDataType()) {
+        if (BaseDataMeta.DataType.NULL == first.getDataType()) {
             if (null != second.getDataValue()) {
-                return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.TRUE);
+                return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.TRUE);
             } else {
-                return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.FALSE);
+                return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.FALSE);
             }
 
-        } else if (BaseDataMeta.DataType.DATATYPE_NULL == second.getDataType()) {
+        } else if (BaseDataMeta.DataType.NULL == second.getDataType()) {
             if (null != first.getDataValue()) {
-                return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.TRUE);
+                return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.TRUE);
             } else {
-                return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.FALSE);
+                return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.FALSE);
             }
 
         } else {
-            if (BaseDataMeta.DataType.DATATYPE_BOOLEAN == first.getDataType()
-                    && BaseDataMeta.DataType.DATATYPE_BOOLEAN == second.getDataType()) {
+            if (BaseDataMeta.DataType.BOOLEAN == first.getDataType()
+                    && BaseDataMeta.DataType.BOOLEAN == second.getDataType()) {
                 Boolean firstValue = first.getBooleanValue();
                 Boolean secondValue = second.getBooleanValue();
                 if (firstValue != null) {
-                    return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, !firstValue.equals(secondValue));
+                    return new Constant(BaseDataMeta.DataType.BOOLEAN, !firstValue.equals(secondValue));
                 } else if (secondValue == null) {
-                    return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.FALSE);
+                    return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.FALSE);
                 } else {
-                    return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.TRUE);
+                    return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.TRUE);
                 }
 
-            } else if (BaseDataMeta.DataType.DATATYPE_DATE == first.getDataType()
-                    && BaseDataMeta.DataType.DATATYPE_DATE == second.getDataType()) {
+            } else if (BaseDataMeta.DataType.DATE == first.getDataType()
+                    && BaseDataMeta.DataType.DATE == second.getDataType()) {
                 //日期比较精确到秒
                 String firstValue = first.getDataValueText();
                 String secondValue = second.getDataValueText();
                 if (firstValue != null) {
-                    return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, !firstValue.equals(secondValue));
+                    return new Constant(BaseDataMeta.DataType.BOOLEAN, !firstValue.equals(secondValue));
                 } else if (secondValue == null) {
-                    return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.FALSE);
+                    return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.FALSE);
                 } else {
-                    return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.TRUE);
+                    return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.TRUE);
                 }
 
-            } else if (BaseDataMeta.DataType.DATATYPE_STRING == first.getDataType()
-                    && BaseDataMeta.DataType.DATATYPE_STRING == second.getDataType()) {
+            } else if (BaseDataMeta.DataType.STRING == first.getDataType()
+                    && BaseDataMeta.DataType.STRING == second.getDataType()) {
                 String firstValue = first.getStringValue();
                 String secondValue = second.getStringValue();
                 if (firstValue != null) {
-                    return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, !firstValue.equals(secondValue));
+                    return new Constant(BaseDataMeta.DataType.BOOLEAN, !firstValue.equals(secondValue));
                 } else if (secondValue == null) {
-                    return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.FALSE);
+                    return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.FALSE);
                 } else {
-                    return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.TRUE);
+                    return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.TRUE);
                 }
 
-            } else if ((BaseDataMeta.DataType.DATATYPE_DOUBLE == first.getDataType()
-                    || BaseDataMeta.DataType.DATATYPE_FLOAT == first.getDataType()
-                    || BaseDataMeta.DataType.DATATYPE_LONG == first.getDataType()
-                    || BaseDataMeta.DataType.DATATYPE_INT == first.getDataType())
+            } else if ((BaseDataMeta.DataType.DOUBLE == first.getDataType()
+                    || BaseDataMeta.DataType.FLOAT == first.getDataType()
+                    || BaseDataMeta.DataType.LONG == first.getDataType()
+                    || BaseDataMeta.DataType.INT == first.getDataType())
                     &&
-                    (BaseDataMeta.DataType.DATATYPE_DOUBLE == second.getDataType()
-                            || BaseDataMeta.DataType.DATATYPE_FLOAT == second.getDataType()
-                            || BaseDataMeta.DataType.DATATYPE_LONG == second.getDataType()
-                            || BaseDataMeta.DataType.DATATYPE_INT == second.getDataType())
+                    (BaseDataMeta.DataType.DOUBLE == second.getDataType()
+                            || BaseDataMeta.DataType.FLOAT == second.getDataType()
+                            || BaseDataMeta.DataType.LONG == second.getDataType()
+                            || BaseDataMeta.DataType.INT == second.getDataType())
 
                     ) {
                 //数值类型比较，全部转换成double
@@ -126,26 +126,26 @@ public class Op_NEQ implements IOperatorExecution {
                 if (firstValue != null && secondValue != null) {
                     int result = Double.compare(firstValue, secondValue);
                     if (result != 0) {
-                        return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.TRUE);
+                        return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.TRUE);
                     } else {
-                        return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.FALSE);
+                        return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.FALSE);
                     }
                 } else if (firstValue == null && secondValue == null) {
-                    return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.FALSE);
+                    return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.FALSE);
                 } else {
-                    return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.TRUE);
+                    return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.TRUE);
                 }
 
-            } else if (BaseDataMeta.DataType.DATATYPE_OBJECT == first.getDataType()
-                    && BaseDataMeta.DataType.DATATYPE_OBJECT == second.getDataType()) {
+            } else if (BaseDataMeta.DataType.OBJECT == first.getDataType()
+                    && BaseDataMeta.DataType.OBJECT == second.getDataType()) {
                 Object firstValue = first.getDataValue();
                 Object secondValue = second.getDataValue();
                 if (firstValue != null) {
-                    return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, !firstValue.equals(secondValue));
+                    return new Constant(BaseDataMeta.DataType.BOOLEAN, !firstValue.equals(secondValue));
                 } else if (secondValue == null) {
-                    return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.FALSE);
+                    return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.FALSE);
                 } else {
-                    return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.TRUE);
+                    return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.TRUE);
                 }
 
             } else {
@@ -177,8 +177,8 @@ public class Op_NEQ implements IOperatorExecution {
         }
 
         //集合类型NEQ运算单独处理
-        if (BaseDataMeta.DataType.DATATYPE_LIST == first.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_LIST == second.getDataType()) {
+        if (BaseDataMeta.DataType.LIST == first.getDataType()
+                || BaseDataMeta.DataType.LIST == second.getDataType()) {
             //目前不支持集合EQ比较，（太麻烦鸟）.考虑使用后期使用函数实现
             throw new IllegalExpressionException("操作符\"" + THIS_OPERATOR.getToken() + "\"参数类型错误"
                     , THIS_OPERATOR.getToken()
@@ -186,39 +186,39 @@ public class Op_NEQ implements IOperatorExecution {
 
         }
 
-        if (BaseDataMeta.DataType.DATATYPE_NULL == first.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_NULL == second.getDataType()) {
-            return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.FALSE);
+        if (BaseDataMeta.DataType.NULL == first.getDataType()
+                || BaseDataMeta.DataType.NULL == second.getDataType()) {
+            return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.FALSE);
 
-        } else if (BaseDataMeta.DataType.DATATYPE_BOOLEAN == first.getDataType()
-                && BaseDataMeta.DataType.DATATYPE_BOOLEAN == second.getDataType()) {
-            return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.FALSE);
+        } else if (BaseDataMeta.DataType.BOOLEAN == first.getDataType()
+                && BaseDataMeta.DataType.BOOLEAN == second.getDataType()) {
+            return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.FALSE);
 
-        } else if (BaseDataMeta.DataType.DATATYPE_DATE == first.getDataType()
-                && BaseDataMeta.DataType.DATATYPE_DATE == second.getDataType()) {
-            return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.FALSE);
+        } else if (BaseDataMeta.DataType.DATE == first.getDataType()
+                && BaseDataMeta.DataType.DATE == second.getDataType()) {
+            return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.FALSE);
 
-        } else if (BaseDataMeta.DataType.DATATYPE_STRING == first.getDataType()
-                && BaseDataMeta.DataType.DATATYPE_STRING == second.getDataType()) {
-            return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.FALSE);
+        } else if (BaseDataMeta.DataType.STRING == first.getDataType()
+                && BaseDataMeta.DataType.STRING == second.getDataType()) {
+            return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.FALSE);
 
-        } else if ((BaseDataMeta.DataType.DATATYPE_DOUBLE == first.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_FLOAT == first.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_LONG == first.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_INT == first.getDataType())
+        } else if ((BaseDataMeta.DataType.DOUBLE == first.getDataType()
+                || BaseDataMeta.DataType.FLOAT == first.getDataType()
+                || BaseDataMeta.DataType.LONG == first.getDataType()
+                || BaseDataMeta.DataType.INT == first.getDataType())
                 &&
-                (BaseDataMeta.DataType.DATATYPE_DOUBLE == second.getDataType()
-                        || BaseDataMeta.DataType.DATATYPE_FLOAT == second.getDataType()
-                        || BaseDataMeta.DataType.DATATYPE_LONG == second.getDataType()
-                        || BaseDataMeta.DataType.DATATYPE_INT == second.getDataType())
+                (BaseDataMeta.DataType.DOUBLE == second.getDataType()
+                        || BaseDataMeta.DataType.FLOAT == second.getDataType()
+                        || BaseDataMeta.DataType.LONG == second.getDataType()
+                        || BaseDataMeta.DataType.INT == second.getDataType())
 
                 ) {
             //数值类型比较
-            return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.FALSE);
+            return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.FALSE);
 
-        } else if (BaseDataMeta.DataType.DATATYPE_OBJECT == first.getDataType()
-                && BaseDataMeta.DataType.DATATYPE_OBJECT == second.getDataType()) {
-            return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.FALSE);
+        } else if (BaseDataMeta.DataType.OBJECT == first.getDataType()
+                && BaseDataMeta.DataType.OBJECT == second.getDataType()) {
+            return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.FALSE);
 
         } else {
             //抛异常

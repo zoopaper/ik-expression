@@ -17,9 +17,13 @@ import java.util.List;
  */
 public abstract class BaseDataMeta {
 
-    //数据类型
+    /**
+     * 数据类型
+     */
     DataType dataType;
-    //值
+    /**
+     * 值
+     */
     Object dataValue;
     //引用类型标识
     private boolean isReference;
@@ -29,7 +33,6 @@ public abstract class BaseDataMeta {
         this.dataValue = dataValue;
         //参数类型校验
         verifyDataMeta();
-
     }
 
     public DataType getDataType() {
@@ -49,11 +52,10 @@ public abstract class BaseDataMeta {
     public String getDataValueText() {
         if (dataValue == null) {
             return null;
-
-        } else if (DataType.DATATYPE_DATE == this.dataType) {
+        } else if (DataType.DATE == this.dataType) {
             return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format((Date) dataValue);
 
-        } else if (BaseDataMeta.DataType.DATATYPE_LIST == this.dataType) {
+        } else if (BaseDataMeta.DataType.LIST == this.dataType) {
             StringBuffer buff = new StringBuffer("[");
             List col = (List) dataValue;
             for (Object o : col) {
@@ -91,7 +93,7 @@ public abstract class BaseDataMeta {
      * @return
      */
     public Boolean getBooleanValue() {
-        if (DataType.DATATYPE_BOOLEAN != this.dataType) {
+        if (DataType.BOOLEAN != this.dataType) {
             throw new UnsupportedOperationException("当前常量类型不支持此操作");
         }
         return (Boolean) dataValue;
@@ -104,7 +106,7 @@ public abstract class BaseDataMeta {
      */
     public Integer getIntegerValue() {
 
-        if (DataType.DATATYPE_INT != this.dataType) {
+        if (DataType.INT != this.dataType) {
             throw new UnsupportedOperationException("当前常量类型不支持此操作");
         }
         return (Integer) dataValue;
@@ -116,7 +118,7 @@ public abstract class BaseDataMeta {
      * @return
      */
     public Long getLongValue() {
-        if (DataType.DATATYPE_INT != this.dataType && DataType.DATATYPE_LONG != this.dataType) {
+        if (DataType.INT != this.dataType && DataType.LONG != this.dataType) {
             throw new UnsupportedOperationException("当前常量类型不支持此操作");
         }
         if (dataValue == null) {
@@ -131,7 +133,7 @@ public abstract class BaseDataMeta {
      * @return
      */
     public Float getFloatValue() {
-        if (DataType.DATATYPE_INT != this.dataType && DataType.DATATYPE_FLOAT != this.dataType && DataType.DATATYPE_LONG != this.dataType) {
+        if (DataType.INT != this.dataType && DataType.FLOAT != this.dataType && DataType.LONG != this.dataType) {
             throw new UnsupportedOperationException("当前常量类型不支持此操作");
         }
         if (dataValue == null) {
@@ -146,10 +148,10 @@ public abstract class BaseDataMeta {
      * @return
      */
     public Double getDoubleValue() {
-        if (DataType.DATATYPE_INT != this.dataType
-                && DataType.DATATYPE_LONG != this.dataType
-                && DataType.DATATYPE_FLOAT != this.dataType
-                && DataType.DATATYPE_DOUBLE != this.dataType) {
+        if (DataType.INT != this.dataType
+                && DataType.LONG != this.dataType
+                && DataType.FLOAT != this.dataType
+                && DataType.DOUBLE != this.dataType) {
             throw new UnsupportedOperationException("当前常量类型不支持此操作");
         }
         if (dataValue == null) {
@@ -165,7 +167,7 @@ public abstract class BaseDataMeta {
      * @throws ParseException
      */
     public Date getDateValue() {
-        if (DataType.DATATYPE_DATE != this.dataType) {
+        if (DataType.DATE != this.dataType) {
             throw new UnsupportedOperationException("当前常量类型不支持此操作");
         }
         return (Date) dataValue;
@@ -178,7 +180,7 @@ public abstract class BaseDataMeta {
      */
     @SuppressWarnings("unchecked")
     public List<Object> getCollection() {
-        if (DataType.DATATYPE_LIST != this.dataType) {
+        if (DataType.LIST != this.dataType) {
             throw new UnsupportedOperationException("当前常量类型不支持此操作");
         }
         return (List<Object>) dataValue;
@@ -233,59 +235,59 @@ public abstract class BaseDataMeta {
      */
     protected void verifyDataMeta() {
         if (dataType != null && dataValue != null) {
-            if (DataType.DATATYPE_NULL == dataType && dataValue != null) {
+            if (DataType.NULL == dataType && dataValue != null) {
                 throw new IllegalArgumentException("数据类型不匹配; 类型：" + dataType + ",值不为空");
 
-            } else if (DataType.DATATYPE_BOOLEAN == dataType) {
+            } else if (DataType.BOOLEAN == dataType) {
                 try {
                     getBooleanValue();
                 } catch (UnsupportedOperationException e) {
                     throw new IllegalArgumentException("数据类型不匹配; 类型：" + dataType + ",值:" + dataValue);
                 }
 
-            } else if (DataType.DATATYPE_DATE == dataType) {
+            } else if (DataType.DATE == dataType) {
                 try {
                     getDateValue();
                 } catch (UnsupportedOperationException e) {
                     throw new IllegalArgumentException("数据类型不匹配; 类型：" + dataType + ",值:" + dataValue);
                 }
 
-            } else if (DataType.DATATYPE_DOUBLE == dataType) {
+            } else if (DataType.DOUBLE == dataType) {
                 try {
                     getDoubleValue();
                 } catch (UnsupportedOperationException e) {
                     throw new IllegalArgumentException("数据类型不匹配; 类型：" + dataType + ",值:" + dataValue);
                 }
 
-            } else if (DataType.DATATYPE_FLOAT == dataType) {
+            } else if (DataType.FLOAT == dataType) {
                 try {
                     getFloatValue();
                 } catch (UnsupportedOperationException e) {
                     throw new IllegalArgumentException("数据类型不匹配; 类型：" + dataType + ",值:" + dataValue);
                 }
 
-            } else if (DataType.DATATYPE_INT == dataType) {
+            } else if (DataType.INT == dataType) {
                 try {
                     getIntegerValue();
                 } catch (UnsupportedOperationException e) {
                     throw new IllegalArgumentException("数据类型不匹配; 类型：" + dataType + ",值:" + dataValue);
                 }
 
-            } else if (DataType.DATATYPE_LONG == dataType) {
+            } else if (DataType.LONG == dataType) {
                 try {
                     getLongValue();
                 } catch (UnsupportedOperationException e) {
                     throw new IllegalArgumentException("数据类型不匹配; 类型：" + dataType + ",值:" + dataValue);
                 }
 
-            } else if (DataType.DATATYPE_STRING == dataType) {
+            } else if (DataType.STRING == dataType) {
                 try {
                     getStringValue();
                 } catch (UnsupportedOperationException e) {
                     throw new IllegalArgumentException("数据类型不匹配; 类型：" + dataType + ",值:" + dataValue);
                 }
 
-            } else if (DataType.DATATYPE_LIST == dataType) {
+            } else if (DataType.LIST == dataType) {
                 try {
                     getCollection();
                 } catch (UnsupportedOperationException e) {
@@ -299,7 +301,7 @@ public abstract class BaseDataMeta {
                     throw new IllegalArgumentException("数据类型不匹配; 类型：" + dataType + ",值:" + dataValue);
                 }
 
-            } else if (DataType.DATATYPE_OBJECT == dataType) {
+            } else if (DataType.OBJECT == dataType) {
                 try {
                     getDataValue();
                 } catch (UnsupportedOperationException e) {
@@ -312,34 +314,34 @@ public abstract class BaseDataMeta {
 
     public Class<?> mapTypeToJavaClass() {
 
-        if (BaseDataMeta.DataType.DATATYPE_BOOLEAN == this.getDataType()) {
+        if (BaseDataMeta.DataType.BOOLEAN == this.getDataType()) {
             return boolean.class;
 
-        } else if (BaseDataMeta.DataType.DATATYPE_DATE == this.getDataType()) {
+        } else if (BaseDataMeta.DataType.DATE == this.getDataType()) {
             return Date.class;
 
-        } else if (BaseDataMeta.DataType.DATATYPE_DOUBLE == this.getDataType()) {
+        } else if (BaseDataMeta.DataType.DOUBLE == this.getDataType()) {
             return double.class;
 
-        } else if (BaseDataMeta.DataType.DATATYPE_FLOAT == this.getDataType()) {
+        } else if (BaseDataMeta.DataType.FLOAT == this.getDataType()) {
             return float.class;
 
-        } else if (BaseDataMeta.DataType.DATATYPE_INT == this.getDataType()) {
+        } else if (BaseDataMeta.DataType.INT == this.getDataType()) {
             return int.class;
 
-        } else if (BaseDataMeta.DataType.DATATYPE_LONG == this.getDataType()) {
+        } else if (BaseDataMeta.DataType.LONG == this.getDataType()) {
             return long.class;
 
-        } else if (BaseDataMeta.DataType.DATATYPE_STRING == this.getDataType()) {
+        } else if (BaseDataMeta.DataType.STRING == this.getDataType()) {
             return String.class;
 
-        } else if (BaseDataMeta.DataType.DATATYPE_LIST == this.getDataType()) {
+        } else if (BaseDataMeta.DataType.LIST == this.getDataType()) {
             return List.class;
 
-        } else if (BaseDataMeta.DataType.DATATYPE_OBJECT == this.getDataType()) {
+        } else if (BaseDataMeta.DataType.OBJECT == this.getDataType()) {
             return Object.class;
 
-        } else if (BaseDataMeta.DataType.DATATYPE_NULL == this.getDataType()) {
+        } else if (BaseDataMeta.DataType.NULL == this.getDataType()) {
             return null;
 
         }
@@ -357,23 +359,23 @@ public abstract class BaseDataMeta {
      */
     private boolean isCompatibleType(BaseDataMeta another) {
 
-        if (DataType.DATATYPE_NULL == this.getDataType()
-                || DataType.DATATYPE_NULL == another.getDataType()) {
+        if (DataType.NULL == this.getDataType()
+                || DataType.NULL == another.getDataType()) {
             return true;
 
         } else if (this.getDataType() == another.getDataType()) {
             return true;
 
-        } else if (DataType.DATATYPE_INT != this.getDataType()
-                && DataType.DATATYPE_LONG != this.getDataType()
-                && DataType.DATATYPE_FLOAT != this.getDataType()
-                && DataType.DATATYPE_DOUBLE != this.getDataType()) {
+        } else if (DataType.INT != this.getDataType()
+                && DataType.LONG != this.getDataType()
+                && DataType.FLOAT != this.getDataType()
+                && DataType.DOUBLE != this.getDataType()) {
             return false;
 
-        } else if (DataType.DATATYPE_INT != another.getDataType()
-                && DataType.DATATYPE_LONG != another.getDataType()
-                && DataType.DATATYPE_FLOAT != another.getDataType()
-                && DataType.DATATYPE_DOUBLE != another.getDataType()) {
+        } else if (DataType.INT != another.getDataType()
+                && DataType.LONG != another.getDataType()
+                && DataType.FLOAT != another.getDataType()
+                && DataType.DOUBLE != another.getDataType()) {
             return false;
 
         } else {
@@ -391,29 +393,29 @@ public abstract class BaseDataMeta {
     public DataType getCompatibleType(BaseDataMeta another) {
 
         if (isCompatibleType(another)) {
-            if (DataType.DATATYPE_NULL == this.getDataType()) {
+            if (DataType.NULL == this.getDataType()) {
                 return another.getDataType();
 
-            } else if (DataType.DATATYPE_NULL == another.getDataType()) {
+            } else if (DataType.NULL == another.getDataType()) {
                 return this.getDataType();
 
             } else if (this.getDataType() == another.getDataType()) {
                 return this.getDataType();
 
-            } else if (DataType.DATATYPE_DOUBLE == this.getDataType()
-                    || DataType.DATATYPE_DOUBLE == another.getDataType()) {
-                return DataType.DATATYPE_DOUBLE;
+            } else if (DataType.DOUBLE == this.getDataType()
+                    || DataType.DOUBLE == another.getDataType()) {
+                return DataType.DOUBLE;
 
-            } else if (DataType.DATATYPE_FLOAT == this.getDataType()
-                    || DataType.DATATYPE_FLOAT == another.getDataType()) {
-                return DataType.DATATYPE_FLOAT;
+            } else if (DataType.FLOAT == this.getDataType()
+                    || DataType.FLOAT == another.getDataType()) {
+                return DataType.FLOAT;
 
-            } else if (DataType.DATATYPE_LONG == this.getDataType()
-                    || DataType.DATATYPE_LONG == another.getDataType()) {
-                return DataType.DATATYPE_LONG;
+            } else if (DataType.LONG == this.getDataType()
+                    || DataType.LONG == another.getDataType()) {
+                return DataType.LONG;
 
             } else {
-                return DataType.DATATYPE_INT;
+                return DataType.INT;
             }
         } else {
             return null;
@@ -428,31 +430,31 @@ public abstract class BaseDataMeta {
             return null;
         }
 
-        if (BaseDataMeta.DataType.DATATYPE_BOOLEAN == this.getDataType()) {
+        if (BaseDataMeta.DataType.BOOLEAN == this.getDataType()) {
             return getBooleanValue();
 
-        } else if (BaseDataMeta.DataType.DATATYPE_DATE == this.getDataType()) {
+        } else if (BaseDataMeta.DataType.DATE == this.getDataType()) {
             return getDateValue();
 
-        } else if (BaseDataMeta.DataType.DATATYPE_DOUBLE == this.getDataType()) {
+        } else if (BaseDataMeta.DataType.DOUBLE == this.getDataType()) {
             return getDoubleValue();
 
-        } else if (BaseDataMeta.DataType.DATATYPE_FLOAT == this.getDataType()) {
+        } else if (BaseDataMeta.DataType.FLOAT == this.getDataType()) {
             return getFloatValue();
 
-        } else if (BaseDataMeta.DataType.DATATYPE_INT == this.getDataType()) {
+        } else if (BaseDataMeta.DataType.INT == this.getDataType()) {
             return getIntegerValue();
 
-        } else if (BaseDataMeta.DataType.DATATYPE_LONG == this.getDataType()) {
+        } else if (BaseDataMeta.DataType.LONG == this.getDataType()) {
             return getLongValue();
 
-        } else if (BaseDataMeta.DataType.DATATYPE_STRING == this.getDataType()) {
+        } else if (BaseDataMeta.DataType.STRING == this.getDataType()) {
             return getStringValue();
 
-        } else if (BaseDataMeta.DataType.DATATYPE_LIST == this.getDataType()) {
+        } else if (BaseDataMeta.DataType.LIST == this.getDataType()) {
             return getCollection();
 
-        } else if (BaseDataMeta.DataType.DATATYPE_OBJECT == this.getDataType()) {
+        } else if (BaseDataMeta.DataType.OBJECT == this.getDataType()) {
             return getDataValue();
 
         } else {
@@ -468,29 +470,51 @@ public abstract class BaseDataMeta {
         this.isReference = isReference;
     }
 
-    //数据类型
+    /**
+     * 数据类型
+     */
     public enum DataType {
 
-        //NULL类型
-        DATATYPE_NULL,
-        //字符窜
-        DATATYPE_STRING,
-        //布尔类
-        DATATYPE_BOOLEAN,
-        //整数
-        DATATYPE_INT,
-        //长整数
-        DATATYPE_LONG,
-        //浮点数
-        DATATYPE_FLOAT,
-        //双精度浮点
-        DATATYPE_DOUBLE,
-        //日期时间
-        DATATYPE_DATE,
-        //集合对象
-        DATATYPE_LIST,
-        //通用对象类型
-        DATATYPE_OBJECT,;
+        /**
+         * NULL类型
+         */
+        NULL,
+        /**
+         * 字符串
+         */
+        STRING,
+        /**
+         * 布尔类
+         */
+        BOOLEAN,
+        /**
+         * 整数
+         */
+        INT,
+        /**
+         * 长整数
+         */
+        LONG,
+        /**
+         * 浮点数
+         */
+        FLOAT,
+        /**
+         * 双精度浮点
+         */
+        DOUBLE,
+        /**
+         * 日期时间
+         */
+        DATE,
+        /**
+         * 集合对象
+         */
+        LIST,
+        /**
+         * 通用对象类型
+         */
+        OBJECT,;
 
     }
 

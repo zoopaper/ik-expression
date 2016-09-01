@@ -2,11 +2,11 @@ package org.wltea.expression;
 
 import org.wltea.expression.datameta.Variable;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ * 表达式计算上下文
  * 表达式计算，过程中用到的变量或者函数。
  *
  * @author deonwu
@@ -58,7 +58,7 @@ public class ExpressionContext extends ConcurrentHashMap<String, Object> {
      * @return
      */
     public Map<String, Variable> getVariableMap() {
-        Map<String, Variable> tmp = new HashMap<String, Variable>();
+        Map<String, Variable> tmp = new ConcurrentHashMap<String, Variable>();
 
         for (String key : keySet()) {
             tmp.put(key, getVariable(key));

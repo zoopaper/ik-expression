@@ -43,21 +43,21 @@ public class Op_NG implements IOperatorExecution {
             first = firstRef.execute();
         }
 
-        if (BaseDataMeta.DataType.DATATYPE_DOUBLE == first.getDataType()) {
+        if (BaseDataMeta.DataType.DOUBLE == first.getDataType()) {
             Double result = 0 - first.getDoubleValue();
-            return new Constant(BaseDataMeta.DataType.DATATYPE_DOUBLE, result);
+            return new Constant(BaseDataMeta.DataType.DOUBLE, result);
 
-        } else if (BaseDataMeta.DataType.DATATYPE_FLOAT == first.getDataType()) {
+        } else if (BaseDataMeta.DataType.FLOAT == first.getDataType()) {
             Float result = 0 - first.getFloatValue();
-            return new Constant(BaseDataMeta.DataType.DATATYPE_FLOAT, result);
+            return new Constant(BaseDataMeta.DataType.FLOAT, result);
 
-        } else if (BaseDataMeta.DataType.DATATYPE_LONG == first.getDataType()) {
+        } else if (BaseDataMeta.DataType.LONG == first.getDataType()) {
             Long result = 0 - first.getLongValue();
-            return new Constant(BaseDataMeta.DataType.DATATYPE_LONG, result);
+            return new Constant(BaseDataMeta.DataType.LONG, result);
 
-        } else if (BaseDataMeta.DataType.DATATYPE_INT == first.getDataType()) {
+        } else if (BaseDataMeta.DataType.INT == first.getDataType()) {
             Integer result = 0 - first.getIntegerValue();
-            return new Constant(BaseDataMeta.DataType.DATATYPE_INT, result);
+            return new Constant(BaseDataMeta.DataType.INT, result);
 
         } else {
             //抛异常
@@ -89,17 +89,17 @@ public class Op_NG implements IOperatorExecution {
             throw new NullPointerException("操作符\"" + THIS_OPERATOR.getToken() + "\"参数为空");
         }
 
-        if (BaseDataMeta.DataType.DATATYPE_DOUBLE == first.getDataType()) {
-            return new Constant(BaseDataMeta.DataType.DATATYPE_DOUBLE, Double.valueOf(0.0));
+        if (BaseDataMeta.DataType.DOUBLE == first.getDataType()) {
+            return new Constant(BaseDataMeta.DataType.DOUBLE, Double.valueOf(0.0));
 
-        } else if (BaseDataMeta.DataType.DATATYPE_FLOAT == first.getDataType()) {
-            return new Constant(BaseDataMeta.DataType.DATATYPE_FLOAT, Float.valueOf(0F));
+        } else if (BaseDataMeta.DataType.FLOAT == first.getDataType()) {
+            return new Constant(BaseDataMeta.DataType.FLOAT, Float.valueOf(0F));
 
-        } else if (BaseDataMeta.DataType.DATATYPE_LONG == first.getDataType()) {
-            return new Constant(BaseDataMeta.DataType.DATATYPE_LONG, Long.valueOf(0l));
+        } else if (BaseDataMeta.DataType.LONG == first.getDataType()) {
+            return new Constant(BaseDataMeta.DataType.LONG, Long.valueOf(0l));
 
-        } else if (BaseDataMeta.DataType.DATATYPE_INT == first.getDataType()) {
-            return new Constant(BaseDataMeta.DataType.DATATYPE_INT, Integer.valueOf(0));
+        } else if (BaseDataMeta.DataType.INT == first.getDataType()) {
+            return new Constant(BaseDataMeta.DataType.INT, Integer.valueOf(0));
 
         } else {
             //抛异常

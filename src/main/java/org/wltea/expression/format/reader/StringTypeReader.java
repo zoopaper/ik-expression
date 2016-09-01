@@ -19,11 +19,11 @@ import java.io.IOException;
  */
 public class StringTypeReader implements ElementReader {
     /**
-     * 字符窜开始标志
+     * 字符串开始标志
      */
     public static final char START_MARK = '"';
     /**
-     * 字符窜结束标志
+     * 字符串结束标志
      */
     public static final char END_MARK = '"';
     /**
@@ -77,6 +77,6 @@ public class StringTypeReader implements ElementReader {
             }
             sb.append(c);
         }
-        throw new FormatException("不是有效的字符窜结束");
+        throw new FormatException("不是有效的字符串结束");
     }
 }

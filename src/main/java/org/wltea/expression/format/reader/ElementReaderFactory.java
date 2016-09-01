@@ -40,8 +40,8 @@ public class ElementReaderFactory {
                     return DateTypeReader.class.newInstance();
                 } else if (c == FunctionTypeReader.START_MARK) {//$开头，构造函数读取器
                     return FunctionTypeReader.class.newInstance();
-                } else if (SplitorTypeReader.SPLITOR_CHAR.indexOf(c) >= 0) {//如果是分隔符，构造分隔符读取器
-                    return SplitorTypeReader.class.newInstance();
+                } else if (SeparateTypeReader.SPLITOR_CHAR.indexOf(c) >= 0) {//如果是分隔符，构造分隔符读取器
+                    return SeparateTypeReader.class.newInstance();
                 } else if (NumberTypeReader.NUMBER_CHARS.indexOf(c) >= 0) {//以数字开头，构造数字类型读取器
                     return NumberTypeReader.class.newInstance();
                 } else if (OperatorTypeReader.isOperatorStart(reader)) {//如果前缀是运算符，构造运算符读取器

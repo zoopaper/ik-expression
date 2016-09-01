@@ -17,7 +17,7 @@ import java.io.IOException;
  * @version 2.0
  *          Sep 21, 2008
  */
-public class SplitorTypeReader implements ElementReader {
+public class SeparateTypeReader implements ElementReader {
 
     public static final String SPLITOR_CHAR = "(),";//所有分割符
 
@@ -36,7 +36,6 @@ public class SplitorTypeReader implements ElementReader {
         if (b == -1 || SPLITOR_CHAR.indexOf(c) == -1) {
             throw new FormatException("不是有效的分割字符");
         }
-        return new Element(Character.toString(c), index,
-                ElementType.SPLITOR);
+        return new Element(Character.toString(c), index, ElementType.SEPARATE);
     }
 }

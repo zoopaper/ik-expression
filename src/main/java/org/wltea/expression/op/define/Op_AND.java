@@ -44,7 +44,7 @@ public class Op_AND implements IOperatorExecution {
             Reference firstRef = (Reference) first.getDataValue();
             first = firstRef.execute();
         }
-        if (DataType.DATATYPE_BOOLEAN == first.getDataType()) {
+        if (DataType.BOOLEAN == first.getDataType()) {
             //对AND操作的优化处理，first为false，则忽略计算第二参数
             if (first.getBooleanValue()) {
                 //如果第二参数为引用，则执行引用
@@ -52,7 +52,7 @@ public class Op_AND implements IOperatorExecution {
                     Reference secondRef = (Reference) second.getDataValue();
                     second = secondRef.execute();
                 }
-                if (DataType.DATATYPE_BOOLEAN == second.getDataType()) {
+                if (DataType.BOOLEAN == second.getDataType()) {
                     return second;
                 } else {
                     //抛异常
@@ -92,10 +92,10 @@ public class Op_AND implements IOperatorExecution {
             throw new NullPointerException("操作符\"" + THIS_OPERATOR.getToken() + "\"参数为空");
         }
 
-        if (DataType.DATATYPE_BOOLEAN == first.getDataType()
-                && DataType.DATATYPE_BOOLEAN == second.getDataType()) {
+        if (DataType.BOOLEAN == first.getDataType()
+                && DataType.BOOLEAN == second.getDataType()) {
 
-            return new Constant(DataType.DATATYPE_BOOLEAN, Boolean.FALSE);
+            return new Constant(DataType.BOOLEAN, Boolean.FALSE);
 
         } else {
             //抛异常

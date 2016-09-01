@@ -34,7 +34,7 @@ public class ExpressionToken {
      */
     private Operator operator;
     /**
-     * 存储字符描述
+     * 字符描述
      */
     private String tokenText;
     /**

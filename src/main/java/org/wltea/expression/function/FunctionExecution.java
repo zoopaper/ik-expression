@@ -62,31 +62,31 @@ public class FunctionExecution {
             Object result = FunctionLoader.invokeFunction(functionName, parameters);
 
             if (result instanceof Boolean) {
-                return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, result);
+                return new Constant(BaseDataMeta.DataType.BOOLEAN, result);
 
             } else if (result instanceof Date) {
-                return new Constant(BaseDataMeta.DataType.DATATYPE_DATE, result);
+                return new Constant(BaseDataMeta.DataType.DATE, result);
 
             } else if (result instanceof Double) {
-                return new Constant(BaseDataMeta.DataType.DATATYPE_DOUBLE, result);
+                return new Constant(BaseDataMeta.DataType.DOUBLE, result);
 
             } else if (result instanceof Float) {
-                return new Constant(BaseDataMeta.DataType.DATATYPE_FLOAT, result);
+                return new Constant(BaseDataMeta.DataType.FLOAT, result);
 
             } else if (result instanceof Integer) {
-                return new Constant(BaseDataMeta.DataType.DATATYPE_INT, result);
+                return new Constant(BaseDataMeta.DataType.INT, result);
 
             } else if (result instanceof Long) {
-                return new Constant(BaseDataMeta.DataType.DATATYPE_LONG, result);
+                return new Constant(BaseDataMeta.DataType.LONG, result);
 
             } else if (result instanceof String) {
-                return new Constant(BaseDataMeta.DataType.DATATYPE_STRING, result);
+                return new Constant(BaseDataMeta.DataType.STRING, result);
 
             } else if (result instanceof List) {
-                return new Constant(BaseDataMeta.DataType.DATATYPE_LIST, result);
+                return new Constant(BaseDataMeta.DataType.LIST, result);
 
             } else {
-                return new Constant(BaseDataMeta.DataType.DATATYPE_OBJECT, result);
+                return new Constant(BaseDataMeta.DataType.OBJECT, result);
 
             }
         } catch (NoSuchMethodException e) {
@@ -154,39 +154,39 @@ public class FunctionExecution {
             //转换成ExpressionToken
             if (boolean.class == returnType
                     || Boolean.class == returnType) {
-                return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.FALSE);
+                return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.FALSE);
 
             } else if (Date.class == returnType) {
-                return new Constant(BaseDataMeta.DataType.DATATYPE_DATE, null);
+                return new Constant(BaseDataMeta.DataType.DATE, null);
 
             } else if (double.class == returnType
                     || Double.class == returnType) {
-                return new Constant(BaseDataMeta.DataType.DATATYPE_DOUBLE, Double.valueOf(0.0));
+                return new Constant(BaseDataMeta.DataType.DOUBLE, Double.valueOf(0.0));
 
             } else if (float.class == returnType
                     || Float.class == returnType) {
-                return new Constant(BaseDataMeta.DataType.DATATYPE_FLOAT, Float.valueOf(0.0f));
+                return new Constant(BaseDataMeta.DataType.FLOAT, Float.valueOf(0.0f));
 
             } else if (int.class == returnType
                     || Integer.class == returnType) {
-                return new Constant(BaseDataMeta.DataType.DATATYPE_INT, Integer.valueOf(0));
+                return new Constant(BaseDataMeta.DataType.INT, Integer.valueOf(0));
 
             } else if (long.class == returnType
                     || Long.class == returnType) {
-                return new Constant(BaseDataMeta.DataType.DATATYPE_LONG, Long.valueOf(0L));
+                return new Constant(BaseDataMeta.DataType.LONG, Long.valueOf(0L));
 
             } else if (String.class == returnType) {
-                return new Constant(BaseDataMeta.DataType.DATATYPE_STRING, null);
+                return new Constant(BaseDataMeta.DataType.STRING, null);
 
             } else if (List.class == returnType) {
-                return new Constant(BaseDataMeta.DataType.DATATYPE_LIST, null);
+                return new Constant(BaseDataMeta.DataType.LIST, null);
 
             } else if (Object.class == returnType) {
-                return new Constant(BaseDataMeta.DataType.DATATYPE_OBJECT, null);
+                return new Constant(BaseDataMeta.DataType.OBJECT, null);
 
             } else if (void.class == returnType
                     || Void.class == returnType) {
-                return new Constant(BaseDataMeta.DataType.DATATYPE_OBJECT, null);
+                return new Constant(BaseDataMeta.DataType.OBJECT, null);
             } else {
                 throw new IllegalStateException("解析器内部错误：不支持的函数返回类型");
             }

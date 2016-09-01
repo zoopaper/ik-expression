@@ -15,7 +15,9 @@ import java.io.IOException;
  *          Oct 9, 2008
  */
 public interface ElementReader {
+
     /**
+     * 表达式读取流
      * @param expressionReader
      * @return
      * @throws FormatException

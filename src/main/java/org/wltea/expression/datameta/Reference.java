@@ -44,7 +44,7 @@ public class Reference {
                 Constant result = op.verify(token.getStartPosition(), args);
                 dataType = result.getDataType();
             } else {
-                dataType = DataType.DATATYPE_OBJECT;
+                dataType = DataType.OBJECT;
             }
         }
     }

@@ -47,7 +47,7 @@ public class Op_OR implements IOperatorExecution {
             Reference firstRef = (Reference) first.getDataValue();
             first = firstRef.execute();
         }
-        if (DataType.DATATYPE_BOOLEAN == first.getDataType()) {
+        if (DataType.BOOLEAN == first.getDataType()) {
             //对OR操作的优化处理，first为true，则忽略计算第二参数
             if (first.getBooleanValue()) {
                 return first;
@@ -57,7 +57,7 @@ public class Op_OR implements IOperatorExecution {
                     Reference secondRef = (Reference) second.getDataValue();
                     second = secondRef.execute();
                 }
-                if (DataType.DATATYPE_BOOLEAN == second.getDataType()) {
+                if (DataType.BOOLEAN == second.getDataType()) {
                     return second;
                 } else {
                     //抛异常
@@ -95,9 +95,9 @@ public class Op_OR implements IOperatorExecution {
             throw new NullPointerException("操作符\"" + THIS_OPERATOR.getToken() + "\"参数为空");
         }
 
-        if (BaseDataMeta.DataType.DATATYPE_BOOLEAN == first.getDataType()
-                && BaseDataMeta.DataType.DATATYPE_BOOLEAN == second.getDataType()) {
-            return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.FALSE);
+        if (BaseDataMeta.DataType.BOOLEAN == first.getDataType()
+                && BaseDataMeta.DataType.BOOLEAN == second.getDataType()) {
+            return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.FALSE);
 
         } else {
             //抛异常

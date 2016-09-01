@@ -72,7 +72,7 @@ public class ExpressionExecutor {
         //初始化检查栈
         Stack<ExpressionToken> verifyStack = new Stack<ExpressionToken>();
 
-        //2.出队列中从左向右依次便利token
+        //2.出队列中从左向右依次遍历token
         //2-1. 声明一个存储函数词元的临时变量
         ExpressionToken _function = null;
 
@@ -88,12 +88,9 @@ public class ExpressionExecutor {
                 Variable var = expressionContext.getVariable(expToken.getVariable().getVariableName());
                 if (var == null) {
                     //当变量没有定义时，视为null型
-                    expToken.getVariable().setDataType(DataType.DATATYPE_NULL);
-
+                    expToken.getVariable().setDataType(DataType.NULL);
                 } else if (var.getDataType() == null) {
-                    throw new IllegalExpressionException("表达式不合法，变量\"" + expToken.toString() + "\"缺少定义;位置:" + expToken.getStartPosition()
-                            , expToken.toString()
-                            , expToken.getStartPosition());
+                    throw new IllegalExpressionException("表达式不合法，变量\"" + expToken.toString() + "\"缺少定义;位置:" + expToken.getStartPosition(), expToken.toString(), expToken.getStartPosition());
                 } else {
                     //设置Token中的变量类型定义
                     expToken.getVariable().setDataType(var.getDataType());
@@ -108,10 +105,7 @@ public class ExpressionExecutor {
                 if (opStack.empty()) {//如果操作栈为空
                     if (Operator.COLON == expToken.getOperator()) {
                         //:操作符不可能单独出现，前面必须有对应的？
-                        throw new IllegalExpressionException("在读入\"：\"时，操作栈中找不到对应的\"？\" "
-                                , expToken.toString()
-                                , expToken.getStartPosition());
-
+                        throw new IllegalExpressionException("在读入\"：\"时，操作栈中找不到对应的\"？\" ", expToken.toString(), expToken.getStartPosition());
                     } else {
                         //一般操作符，则压入栈内；
                         opStack.push(expToken);
@@ -126,23 +120,16 @@ public class ExpressionExecutor {
                         if (ExpressionToken.ETokenType.FUNCTION == onTopOp.getTokenType()) {
                             if (Operator.COLON == expToken.getOperator()) {
                                 //:操作符不可能直接遇见函数，前面必须有对应的？
-                                throw new IllegalExpressionException("在读入\"：\"时，操作栈中找不到对应的\"？\""
-                                        , expToken.toString()
-                                        , expToken.getStartPosition());
-
+                                throw new IllegalExpressionException("在读入\"：\"时，操作栈中找不到对应的\"？\"", expToken.toString(), expToken.getStartPosition());
                             } else {
                                 opStack.push(expToken);
                                 doPeek = false;
                             }
 
-                        } else if (ExpressionToken.ETokenType.SPLITOR == onTopOp.getTokenType()
-                                && "(".equals(onTopOp.getSplitor())) {//如果栈顶元素是(,直接将操作符压入栈
+                        } else if (ExpressionToken.ETokenType.SPLITOR == onTopOp.getTokenType() && "(".equals(onTopOp.getSplitor())) {//如果栈顶元素是(,直接将操作符压入栈
                             if (Operator.COLON == expToken.getOperator()) {
                                 //:操作符不可能直接遇见(，前面必须有对应的？
-                                throw new IllegalExpressionException("在读入\"：\"时，操作栈中找不到对应的\"？\""
-                                        , expToken.toString()
-                                        , expToken.getStartPosition());
-
+                                throw new IllegalExpressionException("在读入\"：\"时，操作栈中找不到对应的\"？\"", expToken.toString(), expToken.getStartPosition());
                             } else {
                                 opStack.push(expToken);
                                 doPeek = false;
@@ -298,9 +285,7 @@ public class ExpressionExecutor {
                     }
 
                     if (doPop && opStack.empty()) {
-                        throw new IllegalExpressionException("在读入\")\"时，操作栈中找不到对应的\"(\" "
-                                , expToken.getSplitor()
-                                , expToken.getStartPosition());
+                        throw new IllegalExpressionException("在读入\")\"时，操作栈中找不到对应的\"(\" ", expToken.getSplitor(), expToken.getStartPosition());
                     }
 
                     //处理读入的“,”
@@ -430,7 +415,7 @@ public class ExpressionExecutor {
                 } else {
                     //throw new IllegalStateException("变量\"" +expToken.getVariable().getVariableName() + "\"不是上下文合法变量" );
                     //当变量没有定义时，视为null型
-                    ExpressionToken constantToken = ExpressionToken.createConstantToken(DataType.DATATYPE_NULL, null);
+                    ExpressionToken constantToken = ExpressionToken.createConstantToken(DataType.NULL, null);
                     compileStack.push(constantToken);
                 }
             } else if (ExpressionToken.ETokenType.OPERATOR == expToken.getTokenType()) {
@@ -560,28 +545,28 @@ public class ExpressionExecutor {
             if (ETokenType.CONSTANT == tokenType) {
 
                 Constant c = token.getConstant();
-                if (BaseDataMeta.DataType.DATATYPE_BOOLEAN == c.getDataType()) {
+                if (BaseDataMeta.DataType.BOOLEAN == c.getDataType()) {
                     expressionText.append(c.getDataValueText()).append(" ");
 
-                } else if (BaseDataMeta.DataType.DATATYPE_DATE == c.getDataType()) {
+                } else if (BaseDataMeta.DataType.DATE == c.getDataType()) {
                     expressionText.append("[").append(c.getDataValueText()).append("] ");
 
-                } else if (BaseDataMeta.DataType.DATATYPE_DOUBLE == c.getDataType()) {
+                } else if (BaseDataMeta.DataType.DOUBLE == c.getDataType()) {
                     expressionText.append(c.getDataValueText()).append(" ");
 
-                } else if (BaseDataMeta.DataType.DATATYPE_FLOAT == c.getDataType()) {
+                } else if (BaseDataMeta.DataType.FLOAT == c.getDataType()) {
                     expressionText.append(c.getDataValueText()).append("F ");
 
-                } else if (BaseDataMeta.DataType.DATATYPE_INT == c.getDataType()) {
+                } else if (BaseDataMeta.DataType.INT == c.getDataType()) {
                     expressionText.append(c.getDataValueText()).append(" ");
 
-                } else if (BaseDataMeta.DataType.DATATYPE_LONG == c.getDataType()) {
+                } else if (BaseDataMeta.DataType.LONG == c.getDataType()) {
                     expressionText.append(c.getDataValueText()).append("L ");
 
-                } else if (BaseDataMeta.DataType.DATATYPE_NULL == c.getDataType()) {
+                } else if (BaseDataMeta.DataType.NULL == c.getDataType()) {
                     expressionText.append(c.getDataValueText()).append(" ");
 
-                } else if (BaseDataMeta.DataType.DATATYPE_STRING == c.getDataType()) {
+                } else if (BaseDataMeta.DataType.STRING == c.getDataType()) {
                     expressionText.append("\"").append(c.getDataValueText()).append("\" ");
 
                 }
@@ -715,37 +700,37 @@ public class ExpressionExecutor {
         ExpressionToken token = null;
         //null
         if (ExpressionTokenHelper.isNull(tokenString)) {
-            token = ExpressionToken.createConstantToken(BaseDataMeta.DataType.DATATYPE_NULL, null);
+            token = ExpressionToken.createConstantToken(BaseDataMeta.DataType.NULL, null);
             tokens.add(token);
 
         } else
             //boolean
             if (ExpressionTokenHelper.isBoolean(tokenString)) {
-                token = ExpressionToken.createConstantToken(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.valueOf(tokenString));
+                token = ExpressionToken.createConstantToken(BaseDataMeta.DataType.BOOLEAN, Boolean.valueOf(tokenString));
                 tokens.add(token);
 
             } else
                 //integer
                 if (ExpressionTokenHelper.isInteger(tokenString)) {
-                    token = ExpressionToken.createConstantToken(BaseDataMeta.DataType.DATATYPE_INT, Integer.valueOf(tokenString));
+                    token = ExpressionToken.createConstantToken(BaseDataMeta.DataType.INT, Integer.valueOf(tokenString));
                     tokens.add(token);
 
                 } else
                     //long
                     if (ExpressionTokenHelper.isLong(tokenString)) {
-                        token = ExpressionToken.createConstantToken(BaseDataMeta.DataType.DATATYPE_LONG, Long.valueOf(tokenString.substring(0, tokenString.length() - 1)));
+                        token = ExpressionToken.createConstantToken(BaseDataMeta.DataType.LONG, Long.valueOf(tokenString.substring(0, tokenString.length() - 1)));
                         tokens.add(token);
 
                     } else
                         //float
                         if (ExpressionTokenHelper.isFloat(tokenString)) {
-                            token = ExpressionToken.createConstantToken(BaseDataMeta.DataType.DATATYPE_FLOAT, Float.valueOf(tokenString.substring(0, tokenString.length() - 1)));
+                            token = ExpressionToken.createConstantToken(BaseDataMeta.DataType.FLOAT, Float.valueOf(tokenString.substring(0, tokenString.length() - 1)));
                             tokens.add(token);
 
                         } else
                             //double
                             if (ExpressionTokenHelper.isDouble(tokenString)) {
-                                token = ExpressionToken.createConstantToken(BaseDataMeta.DataType.DATATYPE_DOUBLE, Double.valueOf(tokenString));
+                                token = ExpressionToken.createConstantToken(BaseDataMeta.DataType.DOUBLE, Double.valueOf(tokenString));
                                 tokens.add(token);
 
                             } else
@@ -753,7 +738,7 @@ public class ExpressionExecutor {
                                 if (ExpressionTokenHelper.isDateTime(tokenString)) {
                                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                                     try {
-                                        token = ExpressionToken.createConstantToken(BaseDataMeta.DataType.DATATYPE_DATE, sdf.parse(tokenString.substring(1, tokenString.length() - 1)));
+                                        token = ExpressionToken.createConstantToken(BaseDataMeta.DataType.DATE, sdf.parse(tokenString.substring(1, tokenString.length() - 1)));
                                     } catch (ParseException e) {
                                         e.printStackTrace();
                                         throw new IllegalExpressionException("日期参数格式错误");
@@ -763,7 +748,7 @@ public class ExpressionExecutor {
                                 } else
                                     //String
                                     if (ExpressionTokenHelper.isString(tokenString)) {
-                                        token = ExpressionToken.createConstantToken(BaseDataMeta.DataType.DATATYPE_STRING, tokenString.substring(1, tokenString.length() - 1));
+                                        token = ExpressionToken.createConstantToken(BaseDataMeta.DataType.STRING, tokenString.substring(1, tokenString.length() - 1));
                                         tokens.add(token);
                                     } else
                                         //分割符
@@ -840,7 +825,7 @@ public class ExpressionExecutor {
             if (op.getOpType() != args.length) {
                 throw new IllegalArgumentException("运算操作符参数为空:" + op.getToken() + ", type:" + op.getOpType() + ", cur:" + args.length);
             } else {
-                result = new Constant(BaseDataMeta.DataType.DATATYPE_FLOAT, Float.valueOf(0F));
+                result = new Constant(BaseDataMeta.DataType.FLOAT, Float.valueOf(0F));
             }
         }
         return ExpressionToken.createConstantToken(result);

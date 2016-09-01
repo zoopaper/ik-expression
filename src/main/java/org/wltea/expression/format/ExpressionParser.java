@@ -119,7 +119,7 @@ public class ExpressionParser {
      * @throws FormatException
      */
     public void pushParenthesis(Element ele) throws FormatException {
-        if (ElementType.SPLITOR == ele.getType()) {
+        if (ElementType.SEPARATE == ele.getType()) {
             if (ele.getText().equals("(")) {
                 parenthesis.push("(");
             } else if (ele.getText().equals(")")) {
@@ -148,22 +148,22 @@ public class ExpressionParser {
 
         //转成ExpressionToken
         if (ElementType.NULL == ele.getType()) {
-            token = ExpressionToken.createConstantToken(DataType.DATATYPE_NULL, null);
+            token = ExpressionToken.createConstantToken(DataType.NULL, null);
         } else if (ElementType.STRING == ele.getType()) {
-            token = ExpressionToken.createConstantToken(DataType.DATATYPE_STRING, ele.getText());
+            token = ExpressionToken.createConstantToken(DataType.STRING, ele.getText());
         } else if (ElementType.BOOLEAN == ele.getType()) {
-            token = ExpressionToken.createConstantToken(DataType.DATATYPE_BOOLEAN, Boolean.valueOf(ele.getText()));
+            token = ExpressionToken.createConstantToken(DataType.BOOLEAN, Boolean.valueOf(ele.getText()));
         } else if (ElementType.INT == ele.getType()) {
-            token = ExpressionToken.createConstantToken(DataType.DATATYPE_INT, Integer.valueOf(ele.getText()));
+            token = ExpressionToken.createConstantToken(DataType.INT, Integer.valueOf(ele.getText()));
         } else if (ElementType.LONG == ele.getType()) {
-            token = ExpressionToken.createConstantToken(DataType.DATATYPE_LONG, Long.valueOf(ele.getText()));
+            token = ExpressionToken.createConstantToken(DataType.LONG, Long.valueOf(ele.getText()));
         } else if (ElementType.FLOAT == ele.getType()) {
-            token = ExpressionToken.createConstantToken(DataType.DATATYPE_FLOAT, Float.valueOf(ele.getText()));
+            token = ExpressionToken.createConstantToken(DataType.FLOAT, Float.valueOf(ele.getText()));
         } else if (ElementType.DOUBLE == ele.getType()) {
-            token = ExpressionToken.createConstantToken(DataType.DATATYPE_DOUBLE, Double.valueOf(ele.getText()));
+            token = ExpressionToken.createConstantToken(DataType.DOUBLE, Double.valueOf(ele.getText()));
         } else if (ElementType.DATE == ele.getType()) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            token = ExpressionToken.createConstantToken(DataType.DATATYPE_DATE, sdf.parse(ele.getText()));
+            token = ExpressionToken.createConstantToken(DataType.DATE, sdf.parse(ele.getText()));
         } else if (ElementType.VARIABLE == ele.getType()) {
             token = ExpressionToken.createVariableToken(ele.getText());
         } else if (ElementType.OPERATOR == ele.getType()) {
@@ -180,7 +180,7 @@ public class ExpressionParser {
             }
         } else if (ElementType.FUNCTION == ele.getType()) {
             token = ExpressionToken.createFunctionToken(ele.getText());
-        } else if (ElementType.SPLITOR == ele.getType()) {
+        } else if (ElementType.SEPARATE == ele.getType()) {
             token = ExpressionToken.createSplitorToken(ele.getText());
         }
         token.setStartPosition(ele.getIndex());

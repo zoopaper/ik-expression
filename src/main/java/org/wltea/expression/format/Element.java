@@ -108,6 +108,6 @@ public class Element {
         /**
          * 分隔符
          */
-        SPLITOR
+        SEPARATE
     }
 }

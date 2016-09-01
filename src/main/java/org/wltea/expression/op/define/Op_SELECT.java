@@ -49,7 +49,7 @@ public class Op_SELECT implements IOperatorExecution {
             Reference firstRef = (Reference) first.getDataValue();
             first = firstRef.execute();
         }
-        if (BaseDataMeta.DataType.DATATYPE_BOOLEAN == first.getDataType()) {
+        if (BaseDataMeta.DataType.BOOLEAN == first.getDataType()) {
             //获取second和third参数的兼容类型
             DataType compatibleType = second.getCompatibleType(third);
 
@@ -102,7 +102,7 @@ public class Op_SELECT implements IOperatorExecution {
             throw new NullPointerException("操作符\"" + THIS_OPERATOR.getToken() + "\"参数为空");
         }
         //判定第一参数是否为boolean类型
-        if (BaseDataMeta.DataType.DATATYPE_BOOLEAN != first.getDataType()) {
+        if (BaseDataMeta.DataType.BOOLEAN != first.getDataType()) {
             throw new IllegalExpressionException("操作符\"" + THIS_OPERATOR.getToken() + "\"参数类型错误"
                     , THIS_OPERATOR.getToken()
                     , opPositin);

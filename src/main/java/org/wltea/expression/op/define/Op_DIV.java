@@ -51,16 +51,16 @@ public class Op_DIV implements IOperatorExecution {
             second = secondRef.execute();
         }
 
-        if (BaseDataMeta.DataType.DATATYPE_NULL == first.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_NULL == second.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_BOOLEAN == first.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_BOOLEAN == second.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_DATE == first.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_DATE == second.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_STRING == first.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_STRING == second.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_LIST == first.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_LIST == second.getDataType()
+        if (BaseDataMeta.DataType.NULL == first.getDataType()
+                || BaseDataMeta.DataType.NULL == second.getDataType()
+                || BaseDataMeta.DataType.BOOLEAN == first.getDataType()
+                || BaseDataMeta.DataType.BOOLEAN == second.getDataType()
+                || BaseDataMeta.DataType.DATE == first.getDataType()
+                || BaseDataMeta.DataType.DATE == second.getDataType()
+                || BaseDataMeta.DataType.STRING == first.getDataType()
+                || BaseDataMeta.DataType.STRING == second.getDataType()
+                || BaseDataMeta.DataType.LIST == first.getDataType()
+                || BaseDataMeta.DataType.LIST == second.getDataType()
                 ) {
             //抛异常
             throw new IllegalArgumentException("操作符\"" + THIS_OPERATOR.getToken() + "\"参数类型错误");
@@ -69,28 +69,28 @@ public class Op_DIV implements IOperatorExecution {
             //判断除数为0
             throw new IllegalArgumentException("操作符\"" + THIS_OPERATOR.getToken() + "\"除数为零");
 
-        } else if (BaseDataMeta.DataType.DATATYPE_DOUBLE == first.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_DOUBLE == second.getDataType()) {
+        } else if (BaseDataMeta.DataType.DOUBLE == first.getDataType()
+                || BaseDataMeta.DataType.DOUBLE == second.getDataType()) {
 
             Double result = first.getDoubleValue() / second.getDoubleValue();
-            return new Constant(BaseDataMeta.DataType.DATATYPE_DOUBLE, result);
+            return new Constant(BaseDataMeta.DataType.DOUBLE, result);
 
-        } else if (BaseDataMeta.DataType.DATATYPE_FLOAT == first.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_FLOAT == second.getDataType()) {
+        } else if (BaseDataMeta.DataType.FLOAT == first.getDataType()
+                || BaseDataMeta.DataType.FLOAT == second.getDataType()) {
 
             Float result = first.getFloatValue() / second.getFloatValue();
-            return new Constant(BaseDataMeta.DataType.DATATYPE_FLOAT, result);
+            return new Constant(BaseDataMeta.DataType.FLOAT, result);
 
-        } else if (BaseDataMeta.DataType.DATATYPE_LONG == first.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_LONG == second.getDataType()) {
+        } else if (BaseDataMeta.DataType.LONG == first.getDataType()
+                || BaseDataMeta.DataType.LONG == second.getDataType()) {
 
             Long result = first.getLongValue() / second.getLongValue();
-            return new Constant(BaseDataMeta.DataType.DATATYPE_LONG, result);
+            return new Constant(BaseDataMeta.DataType.LONG, result);
 
         } else {
 
             Integer result = first.getIntegerValue() / second.getIntegerValue();
-            return new Constant(BaseDataMeta.DataType.DATATYPE_INT, result);
+            return new Constant(BaseDataMeta.DataType.INT, result);
         }
 
     }
@@ -118,36 +118,36 @@ public class Op_DIV implements IOperatorExecution {
             throw new NullPointerException("操作符\"" + THIS_OPERATOR.getToken() + "\"参数为空");
         }
 
-        if (BaseDataMeta.DataType.DATATYPE_NULL == first.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_NULL == second.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_BOOLEAN == first.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_BOOLEAN == second.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_DATE == first.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_DATE == second.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_STRING == first.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_STRING == second.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_LIST == first.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_LIST == second.getDataType()
+        if (BaseDataMeta.DataType.NULL == first.getDataType()
+                || BaseDataMeta.DataType.NULL == second.getDataType()
+                || BaseDataMeta.DataType.BOOLEAN == first.getDataType()
+                || BaseDataMeta.DataType.BOOLEAN == second.getDataType()
+                || BaseDataMeta.DataType.DATE == first.getDataType()
+                || BaseDataMeta.DataType.DATE == second.getDataType()
+                || BaseDataMeta.DataType.STRING == first.getDataType()
+                || BaseDataMeta.DataType.STRING == second.getDataType()
+                || BaseDataMeta.DataType.LIST == first.getDataType()
+                || BaseDataMeta.DataType.LIST == second.getDataType()
                 ) {
             //抛异常
             throw new IllegalExpressionException("操作符\"" + THIS_OPERATOR.getToken() + "\"参数类型错误"
                     , THIS_OPERATOR.getToken()
                     , opPositin
             );
-        } else if (BaseDataMeta.DataType.DATATYPE_DOUBLE == first.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_DOUBLE == second.getDataType()) {
-            return new Constant(BaseDataMeta.DataType.DATATYPE_DOUBLE, Double.valueOf(0.0));
+        } else if (BaseDataMeta.DataType.DOUBLE == first.getDataType()
+                || BaseDataMeta.DataType.DOUBLE == second.getDataType()) {
+            return new Constant(BaseDataMeta.DataType.DOUBLE, Double.valueOf(0.0));
 
-        } else if (BaseDataMeta.DataType.DATATYPE_FLOAT == first.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_FLOAT == second.getDataType()) {
-            return new Constant(BaseDataMeta.DataType.DATATYPE_FLOAT, Float.valueOf(0.0f));
+        } else if (BaseDataMeta.DataType.FLOAT == first.getDataType()
+                || BaseDataMeta.DataType.FLOAT == second.getDataType()) {
+            return new Constant(BaseDataMeta.DataType.FLOAT, Float.valueOf(0.0f));
 
-        } else if (BaseDataMeta.DataType.DATATYPE_LONG == first.getDataType()
-                || BaseDataMeta.DataType.DATATYPE_LONG == second.getDataType()) {
-            return new Constant(BaseDataMeta.DataType.DATATYPE_LONG, Long.valueOf(0L));
+        } else if (BaseDataMeta.DataType.LONG == first.getDataType()
+                || BaseDataMeta.DataType.LONG == second.getDataType()) {
+            return new Constant(BaseDataMeta.DataType.LONG, Long.valueOf(0L));
 
         } else {
-            return new Constant(BaseDataMeta.DataType.DATATYPE_INT, Integer.valueOf(0));
+            return new Constant(BaseDataMeta.DataType.INT, Integer.valueOf(0));
         }
 
     }

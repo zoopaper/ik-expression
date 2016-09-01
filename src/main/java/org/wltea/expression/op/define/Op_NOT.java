@@ -42,9 +42,9 @@ public class Op_NOT implements IOperatorExecution {
             first = firstRef.execute();
         }
 
-        if (BaseDataMeta.DataType.DATATYPE_BOOLEAN == first.getDataType()) {
+        if (BaseDataMeta.DataType.BOOLEAN == first.getDataType()) {
             Boolean result = !first.getBooleanValue();
-            return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, result);
+            return new Constant(BaseDataMeta.DataType.BOOLEAN, result);
 
         } else {
             //抛异常
@@ -76,8 +76,8 @@ public class Op_NOT implements IOperatorExecution {
             throw new NullPointerException("操作符\"" + THIS_OPERATOR.getToken() + "\"参数为空");
         }
 
-        if (BaseDataMeta.DataType.DATATYPE_BOOLEAN == first.getDataType()) {
-            return new Constant(BaseDataMeta.DataType.DATATYPE_BOOLEAN, Boolean.FALSE);
+        if (BaseDataMeta.DataType.BOOLEAN == first.getDataType()) {
+            return new Constant(BaseDataMeta.DataType.BOOLEAN, Boolean.FALSE);
 
         } else {
             //抛异常
